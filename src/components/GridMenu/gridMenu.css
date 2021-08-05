@@ -1,0 +1,110 @@
+.details {
+  filter: drop-shadow(2px 6px 3px rgba(0, 0, 0, 0.4));
+}
+
+.gmi-h2 {
+  width: 122%;
+  left: -11%;
+}
+
+.gmi-stars1-img {
+  transform: translateX(-30%) translateY(5%) rotatez(-10deg);
+  left: 36%;
+  top: 75%;
+}
+.gmi-stars2-img {
+  transform: translateX(-30%) translateY(5%) rotatez(-10deg);
+  left: 53%;
+  top: 63%;
+}
+.gmi-stars3-img {
+  transform: translateX(-30%) translateY(5%) rotatez(-10deg);
+  left: 69%;
+  top: 50%;
+}
+
+.gmi-game-img {
+  transform: translateX(-70%) translateY(-105%) rotatez(-45deg);
+}
+
+.gmi-link:hover {
+  z-index: 4;
+}
+
+li:hover .gmi-h2 {
+  top: 59%;
+}
+
+li:hover .details {
+  transform: rotate(-11deg) translate(5.5%, 15%) scale(1.5);
+}
+
+li:hover .gmi-stars1-img {
+  transform: rotatez(135deg);
+}
+li:hover .gmi-stars2-img {
+  transform: rotatez(135deg);
+}
+li:hover .gmi-stars3-img {
+  transform: rotatez(135deg);
+}
+
+li:hover .gmi-game-img {
+  width: 120%;
+  transform: translateX(-65%) translateY(-80%) rotatez(-45deg);
+}
+
+@media (min-width: 300px) {
+  ul {
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: 3vw;
+    margin: 0 3.9vw 0 15vw;
+  }
+  .details {
+    box-shadow: inset 0px 0px 0px 4vw #fcf8f4;
+  }
+}
+
+@media (min-width: 600px) {
+  ul {
+    grid-template-columns: repeat(3, 1fr);
+    grid-column-gap: 2vw;
+    margin: 0 2.8vw 0 10vw;
+  }
+  .details {
+    box-shadow: inset 0px 0px 0px 2.8vw #fcf8f4;
+  }
+}
+
+@media (min-width: 900px) {
+  ul {
+    grid-template-columns: repeat(4, 1fr);
+    grid-column-gap: 1.5vw;
+    margin: 0 2.2vw 0 8vw;
+  }
+  .details {
+    box-shadow: inset 0px 0px 0px 2.2vw #fcf8f4;
+  }
+}
+
+@media (min-width: 1200px) {
+  ul {
+    grid-template-columns: repeat(5, 1fr);
+    grid-column-gap: 1vw;
+    margin: 0 1.8vw 0 6.5vw;
+  }
+  .details {
+    box-shadow: inset 0px 0px 0px 1.8vw #fcf8f4;
+  }
+}
+
+@media (min-width: 1500px) {
+  ul {
+    grid-template-columns: repeat(6, 1fr);
+    grid-column-gap: 1vw;
+    margin: 0 1.5vw 0 5.5vw;
+  }
+  .details {
+    box-shadow: inset 0px 0px 0px 1.5vw #fcf8f4;
+  }
+}
