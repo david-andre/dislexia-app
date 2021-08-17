@@ -1,0 +1,4 @@
+[submodule "dislexia-app-server"]
+	path = dislexia-app-server
+	url = https://github.com/david-andre/dislexia-app-server.git
+	branch = master
