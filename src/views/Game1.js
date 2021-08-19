@@ -25,7 +25,7 @@ export default class Game1 extends Component {
       ["", "", ""],
     ],
     wordOptions: [
-      [{ text: "MI", val: true }, { text: "TI" }, { text: "NI" },],
+      [{ text: "MI", val: true }, { text: "TI" }, { text: "NI" }],
       [{ text: "SE" }, { text: "CE", val: true }, { text: "TE" }],
       [{ text: "RE", val: true }, { text: "ME" }, { text: "NE" }],
       [{ text: "ME" }, { text: "PE" }, { text: "NE", val: true }],
@@ -34,6 +34,11 @@ export default class Game1 extends Component {
     ],
     score: { correct: 0, incorrect: 0 },
     redirect: null,
+    images: [
+      "https://unsplash.it/400/200",
+      "https://picsum.photos/seed/picsum/200/300",
+      "https://picsum.photos/id/237/200/300",
+    ],
   };
 
   handleClick = (content) => {
@@ -145,12 +150,36 @@ export default class Game1 extends Component {
     audioEl.play();
   };
   showInstructions = () => {
-    Swal.fire(
-      'Instrucciones',
-      'Elige la sílaba correcta',
-      'Debes escuchar antes de elegir'
-    )
-  }
+    Swal.fire({
+      title: "Instrucción 1",
+      text: "Descripción",
+      imageUrl: "https://unsplash.it/400/200",
+      imageWidth: 500,
+      imageHeight: 250,
+      confirmButtonColor: "#3085d6",
+      confirmButtonText: '<i class="fas fa-2x fa-arrow-circle-right"></i>',
+    }).then(() => {
+      Swal.fire({
+        title: "Instrucción 2",
+        text: "Descripción",
+        imageUrl: "https://unsplash.it/400/200",
+        imageWidth: 500,
+        imageHeight: 250,
+        confirmButtonColor: "#3085d6",
+        confirmButtonText: '<i class="fas fa-2x fa-arrow-circle-right"></i>',
+      }).then(() => {
+        Swal.fire({
+          title: "Instrucción 3",
+          text: "Descripción",
+          imageUrl: "https://unsplash.it/400/200",
+          imageWidth: 500,
+          imageHeight: 250,
+          confirmButtonColor: "#3085d6",
+          confirmButtonText: '<i class="fas fa-2x fa-arrow-circle-right"></i>',
+        });
+      });
+    });
+  };
 
   render() {
     if (this.state.redirect) {
@@ -195,6 +224,12 @@ export default class Game1 extends Component {
             icon="fas fa-home"
             color="bg-yellow-500"
             fontSize="text-4xl mt-12"
+          />
+          <ActionButton
+            icon="fas fa-address-book"
+            color="bg-blue-500"
+            fontSize="text-4xl mt-12"
+            handleAnswer={this.showInstructions}
           />
         </div>
         <p className="font-luckiest-guy text-5xl text-white mb-6 text-center">

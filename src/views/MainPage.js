@@ -1,7 +1,10 @@
 import React, { Component } from "react";
+import ActionButton from "../components/ActionButton.js";
 import AnimatedBackground from "../components/AnimatedBackground.js";
 import AnimatedJumbotron from "../components/AnimatedJumbotron.js";
 import LinkButton from "../components/LinkButton.js";
+
+import Swal from "sweetalert2";
 
 const jumbotronProps = {
   content: ["Dislexia", "App"],
@@ -10,8 +13,33 @@ const jumbotronProps = {
 
 export default class MainPage extends Component {
   state = {
-    game1: [{ intento: 0, correctos: 0, incorrectos: 0 }],
-    game2: [{ intento: 0, correctos: 0, incorrectos: 0 }],
+    usuario: { nombre: "", apellido: "" },
+  };
+
+  register = async () => {
+    const { value: formValues } = await Swal.fire({
+      title: "Registro",
+      html:
+        "<label>Nombre</lablel>" +
+        '<input id="swal-input1" class="swal2-input">' +
+        "<label>Apellido</lablel>" +
+        '<input id="swal-input2" class="swal2-input">',
+      focusConfirm: false,
+      preConfirm: () => {
+        return [
+          document.getElementById("swal-input1").value,
+          document.getElementById("swal-input2").value,
+        ];
+      },
+    });
+
+    if (formValues) {
+      this.setState({
+        usuario: { nombre: formValues[0], apellido: formValues[1] },
+      });
+      console.log(this.state.usuario);
+      Swal.fire(JSON.stringify(formValues));
+    }
   };
 
   render() {
@@ -25,11 +53,11 @@ export default class MainPage extends Component {
           fontSize="text-7xl"
           xd="dasdasd"
         />
-        <LinkButton
-          to="/games"
-          label="Salir"
+        <ActionButton
+          label="Registro"
           color="bg-red-500"
           fontSize="text-7xl"
+          handleAnswer={this.register}
         />
         <AnimatedBackground />
       </div>
