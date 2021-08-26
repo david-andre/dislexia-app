@@ -6,7 +6,7 @@ export default class GridMenuItem extends Component {
   render() {
     return (
       <li className="origin-top-left transform rotate-12 pt-80 cursor-pointer">
-        <div className="details absolute h-5/6 w-full top-0 bg-gray-300 rounded-3xl duration-300">
+        <div className="details absolute h-5/6 w-full md:w-9/12 top-0 bg-gray-300 rounded-3xl duration-300">
           <h2 className="gmi-h2 absolute top-2/4 transform -rotate-45 bg-white duration-300">
             Actividad {this.props.key}
           </h2>

@@ -11,6 +11,7 @@ import pecera from "../assets/audio/pecera.mp3";
 import florero from "../assets/audio/florero.mp3";
 import camioneta from "../assets/audio/camioneta.mp3";
 import telefono from "../assets/audio/telefono.mp3";
+import axios from "axios";
 
 import "./game1.css";
 
@@ -109,6 +110,16 @@ export default class Game1 extends Component {
           this.state.score.incorrect
         } puntos</b> ${estrellas}`,
       });
+      axios
+        .post(`http://localhost:4000/api/activities`, {
+          nombre: "Discriminación auditiva 1",
+          correctas: this.state.score.correct,
+          incorrectas: this.state.score.incorrect,
+          usuario: "6126f45ee3ee7e2f70c4feec",
+        })
+        .catch((err) => {
+          console.error(err);
+        });
     } else {
       await Swal.fire({
         icon: alert.icon,

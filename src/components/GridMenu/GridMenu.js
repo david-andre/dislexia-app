@@ -7,7 +7,7 @@ import "./gridMenu.css";
 export default class GridMenu extends Component {
   render() {
     return (
-      <ul className="gm-ul grid gap-x-14 gap-y-4">
+      <ul className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4">
         <Link to="/game1" className="gmi-link">
           <GridMenuItem key="1" />
         </Link>

@@ -213,7 +213,17 @@ export default class Game4 extends Component {
             />
           </div>
         </div>
-
+        <div class="flex justify-evenly">
+          <Card content={this.state.list[0][0]} changeBg="true" />
+          <Card content={this.state.list[0][1]} changeBg="true" />
+          <Card content={this.state.list[0][2]} changeBg="true" />
+        </div>
+        <div class="flex justify-evenly">
+          <Card content={this.state.list[0][0]} changeBg="true" />
+          <Card content={this.state.list[0][1]} changeBg="true" />
+          <Card content={this.state.list[0][2]} changeBg="true" />
+        </div>
+        {/*
         <div class="flex mx-60 text-center">
           <div class="flex-1" onClick={this.handleClick1}>
             <Card content={this.state.list[0][0]} changeBg="true" />
@@ -247,6 +257,7 @@ export default class Game4 extends Component {
             <Card content={this.state.list[0][8]} changeBg="true" />
           </div>
         </div>
+        */}
       </div>
     );
   }

@@ -140,13 +140,13 @@ export default class Card extends Component {
 
     if (this.props.handleClick !== undefined) {
       content = (
-        <div className="card mb-7 bg-red-600" onClick={this.handleClick}>
+        <div className="card bg-red-600" onClick={this.handleClick}>
           <div className="card_title title-white">
             <p className="font-luckiest-guy">
               {this.props.content}{" "}
               <i
                 id="icon"
-                class="fas fa-volume-up mt-5 text-2xl  inline-block align-text-top"
+                class="fas fa-volume-up text-2xl inline-block align-text-top"
                 onClick={this.playAudio}
               />
             </p>
@@ -155,13 +155,12 @@ export default class Card extends Component {
         </div>
       );
     }
-    console.log(this.props.changeBg)
     if (this.props.handleClick === undefined) {
       if (this.props.changeBg !== undefined) {
         if (this.props.changeBg === true) {
           <div className="card bg-red-600" onClick={this.changeBg}>
             <div className="card_title title-white">
-              <p className="text-7xl">
+              <p>
                 {this.props.content}{" "}
                 <i
                   id="icon"
