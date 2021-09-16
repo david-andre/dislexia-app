@@ -6,7 +6,7 @@ import "./button.css";
 export default class LinkButton extends Component {
   constructor(props) {
     super(props);
-    this.className = `start-btn font-luckiest-guy p-4 m-4 h-full hover:bg-yellow-400 text-white rounded-3xl ${this.props.color} ${this.props.fontSize}`;
+    this.className = `start-btn font-luckiest-guy hover:bg-yellow-400 text-white rounded-3xl text-center m-auto ${this.props.color} ${this.props.fontSize}`;
   }
 
   render() {
@@ -15,7 +15,7 @@ export default class LinkButton extends Component {
       content = <label>{this.props.label}</label>;
     }
     if (this.props.icon !== undefined) {
-      content = <i class={this.props.icon}></i>;
+      content = <i className={this.props.icon}></i>;
     }
 
     return (

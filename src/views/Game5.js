@@ -4,7 +4,6 @@ import LinkButton from "../components/LinkButton";
 import Card from "../components/CardsList/Card";
 import { Redirect } from "react-router-dom";
 import Swal from "sweetalert2";
-import "./game4.css";
 
 export default class Game5 extends Component {
   state = {

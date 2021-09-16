@@ -79,13 +79,13 @@ export default class Game1 extends Component {
     }
     if (this.state.score.correct === 4) {
       var unaEstrella = [
-        '<br><div class="vex-custom-field-wrapper"><label for="radio1" style="color:orange; font-size: 100px">★</label><label for="radio1" style="font-size: 100px;" >★</label><label for="radio1" style="font-size: 100px;">★</label></div>',
+        '<br><div className="vex-custom-field-wrapper"><label for="radio1" style="color:orange; font-size: 100px">★</label><label for="radio1" style="font-size: 100px;" >★</label><label for="radio1" style="font-size: 100px;">★</label></div>',
       ];
       var dosEstrella = [
-        '<br><div class="vex-custom-field-wrapper"><label for="radio1" style="color:orange; font-size: 100px">★</label><label for="radio1" style="color:orange; font-size: 100px">★</label><label for="radio1" style="font-size: 100px;">★</label></div>',
+        '<br><div className="vex-custom-field-wrapper"><label for="radio1" style="color:orange; font-size: 100px">★</label><label for="radio1" style="color:orange; font-size: 100px">★</label><label for="radio1" style="font-size: 100px;">★</label></div>',
       ];
       var tresEstrella = [
-        '<br><div class="vex-custom-field-wrapper"><label for="radio1" style="color:orange; font-size: 100px">★</label><label for="radio1" style="color:orange; font-size: 100px">★</label><label for="radio1" style="color:orange; font-size: 100px">★</label></div>',
+        '<br><div className="vex-custom-field-wrapper"><label for="radio1" style="color:orange; font-size: 100px">★</label><label for="radio1" style="color:orange; font-size: 100px">★</label><label for="radio1" style="color:orange; font-size: 100px">★</label></div>',
       ];
       var estrellas;
       if (this.state.score.incorrect > 2) {
@@ -112,10 +112,10 @@ export default class Game1 extends Component {
       });
       axios
         .post(`http://localhost:4000/api/activities`, {
-          nombre: "Discriminación auditiva 1",
+          nombre: "Discriminacion auditiva 1",
           correctas: this.state.score.correct,
           incorrectas: this.state.score.incorrect,
-          usuario: "6126f45ee3ee7e2f70c4feec",
+          usuario: "612e67614c524b34e4811f92",
         })
         .catch((err) => {
           console.error(err);
@@ -177,7 +177,8 @@ export default class Game1 extends Component {
         imageWidth: 500,
         imageHeight: 250,
         confirmButtonColor: "#3085d6",
-        confirmButtonText: '<i class="fas fa-2x fa-arrow-circle-right"></i>',
+        confirmButtonText:
+          '<i class="fas fa-2x fa-arrow-circle-right"></i>',
       }).then(() => {
         Swal.fire({
           title: "Instrucción 3",
@@ -186,7 +187,8 @@ export default class Game1 extends Component {
           imageWidth: 500,
           imageHeight: 250,
           confirmButtonColor: "#3085d6",
-          confirmButtonText: '<i class="fas fa-2x fa-arrow-circle-right"></i>',
+          confirmButtonText:
+            '<i class="fas fa-2x fa-arrow-circle-right"></i>',
         });
       });
     });
@@ -228,43 +230,45 @@ export default class Game1 extends Component {
     });
 
     return (
-      <div className="g1 h-screen overflow-hidden">
-        <div className="py-10">
+      <div className="g1 h-screen overflow-auto">
+        <div className="inline-flex mt-6">
           <LinkButton
             to="/games"
             icon="fas fa-home"
             color="bg-yellow-500"
-            fontSize="text-4xl mt-12"
+            fontSize="flex-1 text-4xl p-4 mx-2"
           />
           <ActionButton
             icon="fas fa-address-book"
             color="bg-blue-500"
-            fontSize="text-4xl mt-12"
+            fontSize="flex-1 text-4xl p-4"
             handleAnswer={this.showInstructions}
           />
         </div>
-        <p className="font-luckiest-guy text-5xl text-white mb-6 text-center">
-          Puntaje: {this.state.score.correct}
-        </p>
+        <div className="flex-1 mt-3">
+          <p className="font-luckiest-guy text-4xl sm:text-5xl text-white mb-6 text-center">
+            Puntaje: {this.state.score.correct}
+          </p>
 
-        <CardsList
-          options={this.state.wordOptions}
-          handleClick={this.handleClick}
-        />
-
-        <div className="text-center">
-          <ActionButton
-            icon="fas fa-check"
-            color="bg-yellow-400"
-            fontSize="text-4xl mt-12"
-            handleAnswer={this.validateAnswer}
+          <CardsList
+            options={this.state.wordOptions}
+            handleClick={this.handleClick}
           />
-          <br></br>
-          <div className="inline-flex mt-12">{items}</div>
-          <i
-            class="fas fa-volume-up text-2xl text-gray-900 inline-block align-top mt-16 cursor-pointer"
-            onClick={this.playAudio}
-          ></i>
+
+          <div className="text-center mt-8">
+            <ActionButton
+              icon="fas fa-check"
+              color="bg-yellow-400"
+              fontSize="text-4xl p-4"
+              handleAnswer={this.validateAnswer}
+            />
+            <br></br>
+            <div className="inline-flex mt-12">{items}</div>
+            <i
+              className="fas fa-volume-up text-2xl text-gray-900 inline-block align-top mt-16 cursor-pointer"
+              onClick={this.playAudio}
+            ></i>
+          </div>
         </div>
         <audio className="camiseta">
           <source src={camiseta}></source>

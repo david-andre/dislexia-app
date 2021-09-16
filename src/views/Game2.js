@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import LinkButton from "../components/LinkButton";
+import ActionButton from "../components/ActionButton";
 import { Redirect } from "react-router-dom";
 import Card from "../components/CardsList/Card";
 import "./game2.css";
 import Swal from "sweetalert2";
+import axios from "axios";
 
 import camiseta from "../assets/audio/camiseta.mp3";
 import pecera from "../assets/audio/pecera.mp3";
@@ -201,13 +203,13 @@ export default class Game2 extends Component {
       }
       if (this.state.score.correct === 5) {
         var unaEstrella = [
-          '<br><div class="vex-custom-field-wrapper"><label for="radio1" style="color:orange; font-size: 100px">★</label><label for="radio1" style="font-size: 100px;" >★</label><label for="radio1" style="font-size: 100px;">★</label></div>',
+          '<br><div className="vex-custom-field-wrapper"><label for="radio1" style="color:orange; font-size: 100px">★</label><label for="radio1" style="font-size: 100px;" >★</label><label for="radio1" style="font-size: 100px;">★</label></div>',
         ];
         var dosEstrella = [
-          '<br><div class="vex-custom-field-wrapper"><label for="radio1" style="color:orange; font-size: 100px">★</label><label for="radio1" style="color:orange; font-size: 100px">★</label><label for="radio1" style="font-size: 100px;">★</label></div>',
+          '<br><div className="vex-custom-field-wrapper"><label for="radio1" style="color:orange; font-size: 100px">★</label><label for="radio1" style="color:orange; font-size: 100px">★</label><label for="radio1" style="font-size: 100px;">★</label></div>',
         ];
         var tresEstrella = [
-          '<br><div class="vex-custom-field-wrapper"><label for="radio1" style="color:orange; font-size: 100px">★</label><label for="radio1" style="color:orange; font-size: 100px">★</label><label for="radio1" style="color:orange; font-size: 100px">★</label></div>',
+          '<br><div className="vex-custom-field-wrapper"><label for="radio1" style="color:orange; font-size: 100px">★</label><label for="radio1" style="color:orange; font-size: 100px">★</label><label for="radio1" style="color:orange; font-size: 100px">★</label></div>',
         ];
         var estrellas;
         if (this.state.score.incorrect > 2) {
@@ -227,6 +229,16 @@ export default class Game2 extends Component {
             "https://i.pinimg.com/originals/7a/55/bd/7a55bd283db2443f1761ebabff200bc6.gif",
           showConfirmButton: false,
           html: `Correctos: <b>${this.state.score.correct} puntos</b> <br> Incorrectos: <b>${this.state.score.incorrect} puntos</b> ${estrellas}`,
+        });
+        axios
+        .post(`http://localhost:4000/api/activities`, {
+          nombre: "Conciencia Fonologica 1",
+          correctas: this.state.score.correct,
+          incorrectas: this.state.score.incorrect,
+          usuario: "612e67614c524b34e4811f92",
+        })
+        .catch((err) => {
+          console.error(err);
         });
         this.setState({ redirect: "/games" });
       }
@@ -265,6 +277,40 @@ export default class Game2 extends Component {
     audioEl.play();
   };
 
+  showInstructions = () => {
+    Swal.fire({
+      title: "Instrucción 1",
+      text: "Descripción",
+      imageUrl: "https://unsplash.it/400/200",
+      imageWidth: 500,
+      imageHeight: 250,
+      confirmButtonColor: "#3085d6",
+      confirmButtonText: '<i class="fas fa-2x fa-arrow-circle-right"></i>',
+    }).then(() => {
+      Swal.fire({
+        title: "Instrucción 2",
+        text: "Descripción",
+        imageUrl: "https://unsplash.it/400/200",
+        imageWidth: 500,
+        imageHeight: 250,
+        confirmButtonColor: "#3085d6",
+        confirmButtonText:
+          '<i class="fas fa-2x fa-arrow-circle-right"></i>',
+      }).then(() => {
+        Swal.fire({
+          title: "Instrucción 3",
+          text: "Descripción",
+          imageUrl: "https://unsplash.it/400/200",
+          imageWidth: 500,
+          imageHeight: 250,
+          confirmButtonColor: "#3085d6",
+          confirmButtonText:
+            '<i class="fas fa-2x fa-arrow-circle-right"></i>',
+        });
+      });
+    });
+  };
+
   render() {
     if (this.state.redirect) {
       return <Redirect to={this.state.redirect} />;
@@ -288,12 +334,18 @@ export default class Game2 extends Component {
     });
     return (
       <div className="g1 h-screen mb-12">
-        <div className="py-10">
+        <div className="inline-flex mt-6">
           <LinkButton
             to="/games"
             icon="fas fa-home"
             color="bg-yellow-500"
-            fontSize="text-4xl mt-12"
+            fontSize="flex-1 text-4xl p-4 mx-2"
+          />
+          <ActionButton
+            icon="fas fa-address-book"
+            color="bg-blue-500"
+            fontSize="flex-1 text-4xl p-4"
+            handleAnswer={this.showInstructions}
           />
         </div>
         <p className="font-luckiest-guy text-5xl text-gray-200 mb-6 text-center">
@@ -321,7 +373,7 @@ export default class Game2 extends Component {
             {tasks.Done}
           </div>
           <i
-            class="fas fa-volume-up text-9xl text-gray-900 inline-block align-top mt-16 cursor-pointer"
+            className="fas fa-volume-up text-9xl text-gray-900 inline-block align-top mt-16 cursor-pointer"
             onClick={this.playAudio}
           ></i>
           <p className="font-luckiest-guy px-20 mx-3 text-9xl text-gray-200">

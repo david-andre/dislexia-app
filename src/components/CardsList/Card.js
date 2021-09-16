@@ -146,7 +146,7 @@ export default class Card extends Component {
               {this.props.content}{" "}
               <i
                 id="icon"
-                class="fas fa-volume-up text-2xl inline-block align-text-top"
+                className="fas fa-volume-up text-2xl inline-block align-text-top"
                 onClick={this.playAudio}
               />
             </p>
@@ -164,7 +164,7 @@ export default class Card extends Component {
                 {this.props.content}{" "}
                 <i
                   id="icon"
-                  class="fas fa-volume-up mt-5 text-2xl  inline-block align-text-top"
+                  className="fas fa-volume-up mt-5 text-2xl  inline-block align-text-top"
                   onClick={this.playAudio}
                 />
               </p>
@@ -179,7 +179,7 @@ export default class Card extends Component {
                   {this.props.content}{" "}
                   <i
                     id="icon"
-                    class="fas fa-volume-up mt-5 text-2xl  inline-block align-text-top"
+                    className="fas fa-volume-up mt-5 text-2xl  inline-block align-text-top"
                     onClick={this.playAudio}
                   />
                 </p>
@@ -197,7 +197,7 @@ export default class Card extends Component {
                   {this.props.content}{" "}
                   <i
                     id="icon"
-                    class="fas fa-volume-up mt-5 text-2xl  inline-block align-text-top"
+                    className="fas fa-volume-up mt-5 text-2xl  inline-block align-text-top"
                     onClick={this.playAudio}
                   />
                 </p>
@@ -213,7 +213,7 @@ export default class Card extends Component {
                   {this.props.content}{" "}
                   <i
                     id="icon"
-                    class="fas fa-volume-up mt-5 text-2xl  inline-block align-text-top"
+                    className="fas fa-volume-up mt-5 text-2xl  inline-block align-text-top"
                     onClick={this.playAudio}
                   />
                 </p>
