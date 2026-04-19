@@ -1,35 +1,233 @@
-.drag-container {
-  text-align: center;
+/* Game2 - Dyslexia-friendly drag layout
+   Use root: class="g1 g2" (g1 = shared gradient + header from game1.css)
+*/
+.g1.g2 {
+  --g2-zone-border: #3b82f6;
+  --g2-zone-border-muted: #64748b;
+  --g2-zone-surface: rgba(255, 255, 255, 0.94);
+  --g2-zone-surface-soft: rgba(255, 255, 255, 0.55);
+  --g2-text: #1e3a5f;
+  --g2-accent: #f59e0b;
 }
 
-.head {
-  display: inline-block;
-  margin: 0;
-  padding: 0;
+.g2-drag-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 0.75rem 1rem 2.5rem;
+  max-width: 56rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.g2-drag-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
   width: 100%;
 }
-.droppable {
-  position: absolute;
-  width: 300px;
-  height: 200px;
-  right: 0;
-  padding-right: 100px;
-  top: 10;
-  border-left: 2px dotted red;
+
+@media (min-width: 768px) {
+  .g2-drag-grid {
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: center;
+  }
 }
 
-.draggable {
-  width: 100px;
-  height: 100px;
-  margin: 10px auto;
+/* Drop zones - replace dotted red with clear borders */
+.g2-zone {
+  flex: 1 1 0;
+  min-height: 14rem;
+  min-width: 0;
+  max-width: 28rem;
+  margin: 0 auto;
+  width: 100%;
+  border-radius: 1rem;
+  padding: 1rem 0.75rem;
+  background: var(--g2-zone-surface);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+  transition: box-shadow 0.2s, border-color 0.2s;
 }
 
-.inProgress {
-  position: absolute;
-  width: 300px;
-  height: 200px;
-  left: 0;
-  top: 10;
-  padding-right: 100px ;
-  border-right: 2px dotted red;
+.g2-zone-source {
+  border: 3px dashed var(--g2-zone-border-muted);
+  background: var(--g2-zone-surface-soft);
+}
+
+.g2-zone-target {
+  border: 3px dashed var(--g2-zone-border);
+}
+
+.g2-zone:focus-within {
+  box-shadow: 0 0 0 3px var(--g2-accent), 0 4px 14px rgba(0, 0, 0, 0.12);
+}
+
+.g2-zone-header {
+  display: block;
+  color: var(--g2-text);
+  font-size: clamp(1.25rem, 4vw, 1.75rem);
+  margin-bottom: 0.75rem;
+  text-align: center;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+/* Syllable cards - min ~44px touch target, larger on Game2 */
+.g2-draggable {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 5.5rem;
+  min-height: 5.5rem;
+  margin: 0.5rem auto;
+  cursor: grab;
+  touch-action: none;
+  border-radius: 1rem;
+}
+
+.g2-draggable:active {
+  cursor: grabbing;
+}
+
+.g2-draggable:focus-visible {
+  outline: 3px solid var(--g2-accent);
+  outline-offset: 2px;
+}
+
+/* Wrapper uses card2; scale inner card for readability */
+.g2 .g2-draggable.card2 {
+  width: auto;
+  min-width: 5.5rem;
+  min-height: 5.5rem;
+  height: auto;
+  max-width: 100%;
+  border-radius: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+}
+
+/* Target column: same full-width cards as source (avoid shrink-to-text from flex centering) */
+.g2 .g2-zone-target .g2-syllable-list {
+  width: 100%;
+}
+
+.g2 .g2-zone-target .g2-syllable-list > .g2-draggable.card2 {
+  width: 100%;
+  max-width: 100%;
+  align-self: stretch;
+}
+
+.g2 .g2-draggable .card {
+  width: 100%;
+  min-height: 5.5rem;
+  height: auto;
+  border-radius: 1rem;
+}
+
+.g2 .g2-draggable .card_title {
+  margin-left: 0;
+  padding: 0.25rem 0.5rem;
+}
+
+.g2 .g2-draggable .card_title p {
+  font-size: clamp(1.75rem, 7vw, 3rem) !important;
+  line-height: 1.1;
+}
+
+/* Controls row: audio + word preview */
+.g2-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  padding-top: 0.5rem;
+}
+
+.g2-audio-btn {
+  min-height: 3rem;
+  padding: 0.75rem 1.25rem;
+  font-size: clamp(1.125rem, 3vw, 1.5rem);
+  border-radius: 0.75rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+.g2-word-preview {
+  color: white;
+  text-align: center;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+  font-size: clamp(1.75rem, 6vw, 3.5rem);
+  line-height: 1.2;
+  padding: 0.5rem 1rem;
+  max-width: 100%;
+  word-break: break-word;
+}
+
+.g2-undo-btn {
+  min-height: 2.75rem;
+  min-width: 10rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.75rem;
+  border: 2px solid var(--g2-zone-border);
+  background: var(--g2-zone-surface);
+  color: var(--g2-text);
+  font-size: clamp(1rem, 3vw, 1.2rem);
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.g2-undo-btn:hover:not(:disabled) {
+  background: white;
+  border-color: var(--g2-accent);
+}
+
+.g2-undo-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.g2-undo-btn:focus-visible {
+  outline: 3px solid var(--g2-accent);
+  outline-offset: 2px;
+}
+
+/* ── Phase 10: Drag-and-drop visual improvements ─────────────────────────── */
+
+/* Target zone highlighted while a card is dragged over it */
+.g2-zone-target.g2-zone-dragover {
+  border-style: solid;
+  border-color: #2563eb;
+  background: rgba(59, 130, 246, 0.1);
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.3), 0 4px 14px rgba(0, 0, 0, 0.12);
+}
+
+/* Source card fades while being dragged so the drop target stands out */
+.g2-draggable.g2-card-dragging {
+  opacity: 0.35;
+  transform: scale(0.95);
+  transition: opacity 0.1s, transform 0.1s;
+}
+
+/* Correct drop: word preview flashes green */
+@keyframes g2-flash-correct {
+  0%   { color: white;   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.25); }
+  30%  { color: #4ade80; text-shadow: 0 0 20px rgba(74, 222, 128, 0.9); }
+  100% { color: white;   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.25); }
+}
+
+.g2-word-preview.g2-flash-correct {
+  animation: g2-flash-correct 0.65s ease-out forwards;
+}
+
+/* Incorrect drop: source zone shakes horizontally */
+@keyframes g2-shake {
+  0%, 100% { transform: translateX(0); }
+  20%      { transform: translateX(-8px); }
+  40%      { transform: translateX(8px); }
+  60%      { transform: translateX(-5px); }
+  80%      { transform: translateX(5px); }
+}
+
+.g2-shake {
+  animation: g2-shake 0.45s ease-in-out;
 }

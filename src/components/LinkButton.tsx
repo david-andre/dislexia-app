@@ -10,6 +10,7 @@ interface LinkButtonProps {
   icon?: 'home' | 'chart' | 'back'
   color?: string
   fontSize?: string
+  ariaLabel?: string
 }
 
 const iconMap: Record<string, LucideIcon> = {
@@ -24,18 +25,20 @@ export default function LinkButton({
   icon = 'home',
   color = 'bg-yellow-500',
   fontSize = 'text-4xl p-4',
+  ariaLabel,
 }: LinkButtonProps) {
   const Icon = iconMap[icon] ?? Home
   const content = label ? (
     <span>{label}</span>
   ) : (
-    <Icon className="inline-block w-8 h-8" />
+    <Icon className="inline-block w-8 h-8" aria-hidden />
   )
 
   return (
     <Link
       to={to}
       className={`start-btn font-luckiest-guy hover:bg-yellow-400 text-white rounded-3xl text-center m-auto ${color} ${fontSize}`}
+      aria-label={ariaLabel}
     >
       {content}
     </Link>

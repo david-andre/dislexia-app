@@ -1,110 +1,190 @@
-.details {
-  filter: drop-shadow(2px 6px 3px rgba(0, 0, 0, 0.4));
+/* ── Grid layout ─────────────────────────────────────────────────────────── */
+
+.gmi-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
 }
 
-.gmi-h2 {
-  width: 122%;
-  left: -11%;
-}
-
-.gmi-stars1-img {
-  transform: translateX(-30%) translateY(5%) rotatez(-10deg);
-  left: 36%;
-  top: 75%;
-}
-.gmi-stars2-img {
-  transform: translateX(-30%) translateY(5%) rotatez(-10deg);
-  left: 53%;
-  top: 63%;
-}
-.gmi-stars3-img {
-  transform: translateX(-30%) translateY(5%) rotatez(-10deg);
-  left: 69%;
-  top: 50%;
-}
-
-.gmi-game-img {
-  transform: translateX(-70%) translateY(-105%) rotatez(-45deg);
-}
-
-.gmi-link:hover {
-  z-index: 4;
-}
-
-li:hover .gmi-h2 {
-  top: 59%;
-}
-
-li:hover .details {
-  transform: rotate(-11deg) translate(5.5%, 15%) scale(1.5);
-}
-
-li:hover .gmi-stars1-img {
-  transform: rotatez(135deg);
-}
-li:hover .gmi-stars2-img {
-  transform: rotatez(135deg);
-}
-li:hover .gmi-stars3-img {
-  transform: rotatez(135deg);
-}
-
-li:hover .gmi-game-img {
-  width: 120%;
-  transform: translateX(-65%) translateY(-80%) rotatez(-45deg);
-}
-
-@media (min-width: 300px) {
-  ul {
+@media (min-width: 640px) {
+  .gmi-grid {
     grid-template-columns: repeat(2, 1fr);
-    grid-column-gap: 3vw;
-    margin: 0 3.9vw 0 15vw;
-  }
-  .details {
-    box-shadow: inset 0px 0px 0px 4vw #fcf8f4;
-  }
-}
-
-@media (min-width: 600px) {
-  ul {
-    grid-template-columns: repeat(3, 1fr);
-    grid-column-gap: 2vw;
-    margin: 0 2.8vw 0 10vw;
-  }
-  .details {
-    box-shadow: inset 0px 0px 0px 2.8vw #fcf8f4;
+    max-width: 52rem;
   }
 }
 
 @media (min-width: 900px) {
-  ul {
-    grid-template-columns: repeat(4, 1fr);
-    grid-column-gap: 1.5vw;
-    margin: 0 2.2vw 0 8vw;
-  }
-  .details {
-    box-shadow: inset 0px 0px 0px 2.2vw #fcf8f4;
+  .gmi-grid {
+    grid-template-columns: repeat(3, 1fr);
+    max-width: 64rem;
   }
 }
 
-@media (min-width: 1200px) {
-  ul {
-    grid-template-columns: repeat(5, 1fr);
-    grid-column-gap: 1vw;
-    margin: 0 1.8vw 0 6.5vw;
-  }
-  .details {
-    box-shadow: inset 0px 0px 0px 1.8vw #fcf8f4;
-  }
+/* ── Link wrapper ─────────────────────────────────────────────────────────── */
+
+.gmi-link {
+  display: block;
+  text-decoration: none;
+  border-radius: 1.25rem;
+  outline: none;
 }
 
-@media (min-width: 1500px) {
-  ul {
-    grid-template-columns: repeat(6, 1fr);
-    grid-column-gap: 1vw;
-    margin: 0 1.5vw 0 5.5vw;
-  }
-  .details {
-    box-shadow: inset 0px 0px 0px 1.5vw #fcf8f4;
-  }
+.gmi-link:focus-visible .gmi-card {
+  outline: 3px solid white;
+  outline-offset: 3px;
+}
+
+/* ── Card ────────────────────────────────────────────────────────────────── */
+
+.gmi-card {
+  background: rgba(255, 255, 255, 0.92);
+  border-radius: 1.25rem;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+}
+
+.gmi-link:hover .gmi-card,
+.gmi-link:focus-visible .gmi-card {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.22);
+}
+
+.gmi-link:active .gmi-card {
+  transform: scale(0.97);
+}
+
+/* ── Preview area ─────────────────────────────────────────────────────────── */
+
+.gmi-card-preview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem 1rem 1.25rem;
+  background: var(--gmi-accent, #3b82f6);
+  min-height: 7rem;
+}
+
+/* ── Preview variants ─────────────────────────────────────────────────────── */
+
+.gmi-preview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+/* Syllable tile */
+.gmi-tile {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  color: #1e3a5f;
+  font-family: 'Luckiest Guy', cursive;
+  font-size: 1.35rem;
+  border-radius: 0.6rem;
+  padding: 0.3rem 0.65rem;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+  line-height: 1;
+}
+
+.gmi-tile--blank {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: 2.5px dashed rgba(255, 255, 255, 0.7);
+  box-shadow: none;
+}
+
+.gmi-tile--dragging {
+  opacity: 0.75;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+  transform: rotate(-4deg) scale(1.1);
+}
+
+/* Arrow between tiles */
+.gmi-arrow {
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 700;
+  opacity: 0.85;
+}
+
+/* Empty slot for Game 2 preview */
+.gmi-slot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.8rem;
+  height: 2.2rem;
+  border: 2.5px dashed rgba(255, 255, 255, 0.7);
+  border-radius: 0.5rem;
+  color: rgba(255, 255, 255, 0.7);
+  font-family: 'Luckiest Guy', cursive;
+  font-size: 1.2rem;
+}
+
+/* Letter cards for Game 4 preview */
+.gmi-letter {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: 0.6rem;
+  font-family: 'Luckiest Guy', cursive;
+  font-size: 1.6rem;
+  line-height: 1;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+.gmi-letter--target {
+  background: white;
+  color: #1e3a5f;
+}
+
+.gmi-letter--distractor {
+  background: rgba(255, 255, 255, 0.25);
+  color: rgba(255, 255, 255, 0.9);
+  border: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+/* ── Card body ────────────────────────────────────────────────────────────── */
+
+.gmi-card-body {
+  padding: 1rem 1.1rem 0.5rem;
+  flex: 1;
+}
+
+.gmi-card-title {
+  font-family: 'Luckiest Guy', cursive;
+  font-size: clamp(1rem, 3vw, 1.2rem);
+  color: #1e3a5f;
+  margin: 0 0 0.35rem;
+  line-height: 1.2;
+}
+
+.gmi-card-desc {
+  font-size: clamp(0.78rem, 2.2vw, 0.875rem);
+  color: #475569;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* ── CTA strip ────────────────────────────────────────────────────────────── */
+
+.gmi-card-cta {
+  padding: 0.6rem 1.1rem 0.85rem;
+  font-family: 'Luckiest Guy', cursive;
+  font-size: 0.95rem;
+  color: var(--gmi-accent, #3b82f6);
+  letter-spacing: 0.03em;
 }

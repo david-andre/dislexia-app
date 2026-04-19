@@ -1,0 +1,187 @@
+/* Game4 — Identificación Visual
+   Use root: class="g1 g4" (g1 = shared gradient + header tokens from game1.css)
+*/
+.g1.g4 {
+  --g4-surface: rgba(255, 255, 255, 0.95);
+  --g4-text: #1e3a5f;
+  --g4-accent: #f59e0b;
+  --g4-target-bg: #fef3c7;
+  --g4-target-border: #f59e0b;
+}
+
+/* ── Layout ─────────────────────────────────────────────────────────────── */
+
+.g4-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 0.75rem 1rem 3rem;
+  max-width: 40rem;
+  margin: 0 auto;
+}
+
+/* ── Target letter display ───────────────────────────────────────────────── */
+
+.g4-target {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.g4-target-label {
+  color: white;
+  font-size: clamp(1.1rem, 3.5vw, 1.4rem);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.g4-target-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 6rem;
+  min-height: 6rem;
+  border-radius: 1.5rem;
+  background: var(--g4-target-bg);
+  border: 3px solid var(--g4-target-border);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+  font-size: clamp(3rem, 10vw, 4.5rem);
+  font-family: 'Luckiest Guy', cursive;
+  color: var(--g4-text);
+  line-height: 1;
+  padding: 0.5rem 1.25rem;
+}
+
+/* ── Letter grid ─────────────────────────────────────────────────────────── */
+
+.g4-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.875rem;
+  width: 100%;
+}
+
+/* Wrapper around Card — mirrors .g2-draggable.card2 pattern from game2.css */
+.g4-card-wrapper.card2 {
+  width: auto;
+  height: auto;
+  min-width: 0;
+  min-height: 5.5rem;
+  border-radius: 1rem;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.1s, box-shadow 0.1s;
+}
+
+.g4-card-wrapper.card2:hover {
+  transform: translateY(-3px);
+}
+
+.g4-card-wrapper.card2:active {
+  transform: scale(0.94);
+}
+
+.g4-card-wrapper.card2:focus-visible {
+  outline: 3px solid white;
+  outline-offset: 3px;
+}
+
+/* Selected ring — amber glow matching the yellow card state */
+.g4-card-wrapper.g4-card-selected {
+  box-shadow: 0 0 0 4px var(--g4-accent),
+    5px 5px 30px 7px rgba(0, 0, 0, 0.25),
+    -5px -5px 30px 7px rgba(0, 0, 0, 0.22);
+}
+
+/* Inner .card: fill the wrapper, override fixed 230×150 from cardsList.css */
+.g4 .g4-card-wrapper .card {
+  position: relative;
+  width: 100%;
+  height: auto;
+  min-height: 5.5rem;
+  border-radius: 1rem;
+}
+
+/* Card title: override the 100px font and left margin from cardsList.css */
+.g4 .g4-card-wrapper .card .card_title {
+  font-size: inherit;
+  margin-left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 5.5rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 1rem;
+}
+
+.g4 .g4-card-wrapper .card .card_title p {
+  font-size: clamp(3rem, 10vw, 4.5rem) !important;
+  line-height: 1.1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  width: 100%;
+}
+
+/* Volume icon: tuck into corner like game1.css does */
+.g4 .g4-card-wrapper .card .card_title p svg {
+  position: absolute;
+  top: 0.35rem;
+  right: 0.45rem;
+  width: 1.35rem !important;
+  height: 1.35rem !important;
+  flex-shrink: 0;
+}
+
+/* ── Verify button ────────────────────────────────────────────────────────── */
+
+.g4-verify-btn {
+  min-height: 3.25rem;
+  min-width: 12rem;
+  padding: 0.75rem 2rem;
+  border-radius: 0.875rem;
+  background: #22c55e;
+  color: white;
+  font-family: 'Luckiest Guy', cursive;
+  font-size: clamp(1.1rem, 3.5vw, 1.4rem);
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(34, 197, 94, 0.4);
+  transition: background 0.15s, transform 0.1s;
+}
+
+.g4-verify-btn:hover:not(:disabled) {
+  background: #16a34a;
+  transform: translateY(-1px);
+}
+
+.g4-verify-btn:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+.g4-verify-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.g4-verify-btn:focus-visible {
+  outline: 3px solid white;
+  outline-offset: 3px;
+}
+
+/* ── Shake animation for incorrect answer ────────────────────────────────── */
+
+@keyframes g4-shake {
+  0%, 100% { transform: translateX(0); }
+  20%      { transform: translateX(-8px); }
+  40%      { transform: translateX(8px); }
+  60%      { transform: translateX(-5px); }
+  80%      { transform: translateX(5px); }
+}
+
+.g4-shake {
+  animation: g4-shake 0.45s ease-in-out;
+}

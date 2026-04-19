@@ -2,3 +2,22 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Prevents white flash before React mounts */
+body {
+  background-color: #5b9bd5;
+}
+
+@keyframes app-spin {
+  to { transform: rotate(360deg); }
+}
+
+.page-loader-spinner {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  border: 5px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  animation: app-spin 0.75s linear infinite;
+  flex-shrink: 0;
+}

@@ -7,17 +7,27 @@ import LoginRegister from '@/features/auth/LoginRegister'
 const MainPage = lazy(() => import('@/views/MainPage'))
 const GamesMenu = lazy(() => import('@/views/GamesMenu'))
 const Statistics = lazy(() => import('@/views/Statistics'))
+const Game1LevelSelect = lazy(() => import('@/views/Game1/Game1LevelSelect'))
 const Game1 = lazy(() => import('@/views/Game1'))
+const Game2LevelSelect = lazy(() => import('@/views/Game2/Game2LevelSelect'))
 const Game2 = lazy(() => import('@/views/Game2'))
 const Game3 = lazy(() => import('@/views/Game3'))
+const Game4LevelSelect = lazy(() => import('@/views/Game4/Game4LevelSelect'))
 const Game4 = lazy(() => import('@/views/Game4'))
-const Game5 = lazy(() => import('@/views/Game5'))
-const Game6 = lazy(() => import('@/views/Game6'))
 
 function PageLoader() {
   return (
-    <div className="flex items-center justify-center min-h-screen">
-      <div className="animate-pulse text-xl">Cargando...</div>
+    <div
+      className="flex flex-col items-center justify-center gap-5 min-h-screen"
+      style={{ background: 'linear-gradient(135deg, #5b9bd5 0%, #7bb8e8 50%, #a8d4f0 100%)' }}
+    >
+      <div className="page-loader-spinner" />
+      <span
+        className="text-white text-2xl tracking-wide"
+        style={{ fontFamily: "'Luckiest Guy', cursive" }}
+      >
+        Cargando...
+      </span>
     </div>
   )
 }
@@ -58,12 +68,28 @@ export default function App() {
               path="/game1"
               element={
                 <ProtectedRoute>
+                  <Game1LevelSelect />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/game1/level/:levelId"
+              element={
+                <ProtectedRoute>
                   <Game1 />
                 </ProtectedRoute>
               }
             />
             <Route
               path="/game2"
+              element={
+                <ProtectedRoute>
+                  <Game2LevelSelect />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/game2/level/:levelId"
               element={
                 <ProtectedRoute>
                   <Game2 />
@@ -82,26 +108,20 @@ export default function App() {
               path="/game4"
               element={
                 <ProtectedRoute>
+                  <Game4LevelSelect />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/game4/level/:levelId"
+              element={
+                <ProtectedRoute>
                   <Game4 />
                 </ProtectedRoute>
               }
             />
-            <Route
-              path="/game5"
-              element={
-                <ProtectedRoute>
-                  <Game5 />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/game6"
-              element={
-                <ProtectedRoute>
-                  <Game6 />
-                </ProtectedRoute>
-              }
-            />
+            <Route path="/game5" element={<Navigate to="/game4" replace />} />
+            <Route path="/game6" element={<Navigate to="/game4" replace />} />
             <Route path="/stadistics" element={<Navigate to="/statistics" replace />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>

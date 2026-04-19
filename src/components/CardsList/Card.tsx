@@ -96,8 +96,21 @@ export default function Card({ content, handleClick, changeBg, Bg, backgroundCol
   )
 
   if (handleClick) {
+    const handleKeyDown = (e: React.KeyboardEvent) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault()
+        handleClick(content)
+      }
+    }
     return (
-      <div className="card bg-red-600" onClick={() => handleClick(content)}>
+      <div
+        className="card bg-red-600"
+        role="button"
+        tabIndex={0}
+        onClick={() => handleClick(content)}
+        onKeyDown={handleKeyDown}
+        aria-label={`Opción ${content}. Presiona Enter o Espacio para seleccionar.`}
+      >
         <div className="card_title title-white">
           <p className="font-luckiest-guy">{baseContent}</p>
         </div>

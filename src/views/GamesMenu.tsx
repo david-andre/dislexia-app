@@ -1,30 +1,32 @@
 import AnimatedJumbotron from '@/components/AnimatedJumbotron'
 import GridMenu from '@/components/GridMenu/GridMenu'
 import LinkButton from '@/components/LinkButton'
+import './game1.css'
 
 const jumbotronProps = {
   content: ['Actividades', ''] as [string, string],
-  style: 'invisible md:visible mt-6',
-  text: 'text-sm md:text-7xl lg:text-8xl',
+  style: 'flex-1 text-center',
+  text: 'text-4xl sm:text-5xl',
 }
 
 export default function GamesMenu() {
   return (
-    <div className="h-auto text-center">
-      <div className="flex justify-around mb-8">
+    <div className="g1 min-h-screen px-4 pt-6 pb-12">
+      <div className="flex items-center justify-between mb-10">
         <LinkButton
           to="/main-page"
-          label="atras"
           icon="back"
-          color="bg-blue-500"
-          fontSize="text-3xl sm:text-4xl mt-6 p-4"
+          color="bg-blue-500 hover:bg-blue-600"
+          fontSize="text-2xl p-3 min-w-[3rem] min-h-[3rem]"
+          ariaLabel="Volver al menú principal"
         />
         <AnimatedJumbotron features={jumbotronProps} />
         <LinkButton
           to="/statistics"
           icon="chart"
-          color="bg-yellow-500"
-          fontSize="text-3xl sm:text-4xl mt-6 p-4"
+          color="bg-amber-500 hover:bg-amber-600"
+          fontSize="text-2xl p-3 min-w-[3rem] min-h-[3rem]"
+          ariaLabel="Ver estadísticas"
         />
       </div>
       <GridMenu />

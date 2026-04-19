@@ -7,6 +7,7 @@ interface ActionButtonProps {
   icon?: 'book' | 'check' | 'user-plus'
   color?: string
   fontSize?: string
+  ariaLabel?: string
   handleAnswer: () => void
 }
 
@@ -21,13 +22,14 @@ export default function ActionButton({
   icon = 'book',
   color = 'bg-yellow-500',
   fontSize = 'text-4xl p-4',
+  ariaLabel,
   handleAnswer,
 }: ActionButtonProps) {
   const Icon = iconMap[icon] ?? BookOpen
   const content = label ? (
     <span>{label}</span>
   ) : (
-    <Icon className="inline-block w-8 h-8" />
+    <Icon className="inline-block w-8 h-8" aria-hidden />
   )
 
   return (
@@ -35,6 +37,7 @@ export default function ActionButton({
       type="button"
       className={`start-btn font-luckiest-guy hover:bg-yellow-400 text-white rounded-3xl text-center m-auto ${color} ${fontSize}`}
       onClick={handleAnswer}
+      aria-label={ariaLabel}
     >
       {content}
     </button>

@@ -1,11 +1,183 @@
+/* Game1 - Dyslexia-friendly design
+   - Soft pastel background, high contrast text
+   - Generous spacing, clear hierarchy
+   - Large touch targets (min 44px)
+*/
 .g1 {
-  text-shadow: 0 0.5em 20px rgba(0, 0, 0, 1), 0.05em -0.03em 0 rgba(0, 0, 0, 1),
-    0.05em 0.005em 0 rgba(0, 0, 0, 1), 0em 0.08em 0 rgba(0, 0, 0, 1),
-    0.05em 0.08em 0 rgba(0, 0, 0, 1), 0px -0.03em 0 rgba(0, 0, 0, 1),
-    -0.03em -0.03em 0 rgba(0, 0, 0, 1), -0.03em 0.08em 0 rgba(0, 0, 0, 1),
-    -0.03em 0 0 rgba(0, 0, 0, 1);
-  background-image: url("../assets/img/gato.jpg");
-  background-position: right;
-  background-repeat: no-repeat;
-  background-color: #497d93;
+  --game1-bg: linear-gradient(135deg, #5b9bd5 0%, #7bb8e8 50%, #a8d4f0 100%);
+  --game1-surface: rgba(255, 255, 255, 0.95);
+  --game1-text: #1e3a5f;
+  --game1-accent: #f59e0b;
+  --game1-card: #ea580c;
+  --game1-card-hover: #c2410c;
+  --game1-success: #22c55e;
+  --game1-syllable-bg: #fff;
+  --game1-syllable-border: #3b82f6;
+  --game1-blank-border: #64748b;
+
+  background: var(--game1-bg);
+  background-color: #5b9bd5;
+  min-height: 100vh;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
+}
+
+/* Header score badge */
+.g1 .g1-score-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1.25rem;
+  border-radius: 9999px;
+  background: var(--game1-surface);
+  color: var(--game1-text);
+  font-weight: 700;
+  font-size: clamp(1.25rem, 4vw, 1.75rem);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+/* Progress dots */
+.g1 .g1-progress-dot {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  transition: background 0.2s;
+}
+.g1 .g1-progress-dot.g1-progress-dot-done {
+  background: var(--game1-success);
+}
+.g1 .g1-progress-dot.g1-progress-dot-current {
+  background: white;
+  box-shadow: 0 0 0 2px var(--game1-accent);
+  transform: scale(1.2);
+}
+
+/* Syllable boxes - dyslexia friendly */
+.g1 .syllable-box {
+  min-width: 4rem;
+  min-height: 5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1rem;
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  font-weight: 700;
+  padding: 0.75rem 1.25rem;
+  margin: 0 0.5rem;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.g1 .syllable-box:focus-visible {
+  outline: 3px solid var(--game1-accent);
+  outline-offset: 2px;
+}
+.g1 .syllable-box-blank {
+  min-width: 5rem;
+  min-height: 5rem;
+  background: rgba(255, 255, 255, 0.3);
+  border: 3px dashed var(--game1-blank-border);
+  color: transparent;
+}
+.g1 .syllable-box-option {
+  background: var(--game1-syllable-bg);
+  border: 3px solid var(--game1-syllable-border);
+  color: var(--game1-text);
+}
+.g1 .syllable-box-fixed {
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Game1 option cards - larger, softer */
+.g1 .cards-list {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  padding: 0 1rem;
+  max-width: 42rem;
+  margin-left: auto;
+  margin-right: auto;
+  flex-wrap: wrap;
+}
+.g1 .cards-list .card {
+  position: relative;
+  width: min(100%, 200px);
+  min-height: 5.5rem;
+  background: var(--game1-card);
+  border-radius: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  transition: transform 0.15s, box-shadow 0.15s;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: 0.35rem 0.5rem;
+  overflow: hidden;
+}
+/* Override cardsList.css: margin-left + huge font pushed the Volume icon outside the card */
+.g1 .cards-list .card .card_title {
+  margin-left: 0 !important;
+  font-size: inherit !important;
+  line-height: 1 !important;
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  padding: 0.25rem;
+  border-radius: 0.75rem;
+  box-sizing: border-box;
+}
+.g1 .cards-list .card .card_title p {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  width: 100%;
+  margin: 0;
+  min-width: 0;
+  font-size: inherit !important;
+}
+/* Corner of the orange card; syllable stays centered (icon out of flex flow) */
+.g1 .cards-list .card .card_title p svg {
+  position: absolute;
+  top: 0.35rem;
+  right: 0.45rem;
+  z-index: 1;
+  width: 1.35rem !important;
+  height: 1.35rem !important;
+  flex-shrink: 0;
+}
+.g1 .cards-list .card:hover {
+  background: var(--game1-card-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+}
+.g1 .cards-list .card:active {
+  transform: scale(0.97);
+}
+
+/* Footer validate button - larger touch target */
+.g1 .g1-validate-btn {
+  min-width: 4rem;
+  min-height: 4rem;
+  padding: 1rem 1.5rem;
+  font-size: 1.5rem;
+  border-radius: 1rem;
+}
+
+/* Level select cards */
+.g1-level-card:focus-visible {
+  outline: 3px solid var(--game1-accent);
+  outline-offset: 2px;
+}
+
+/* Escuchar button */
+.g1 .g1-audio-btn {
+  min-height: 3rem;
+  padding: 0.75rem 1.25rem;
+  font-size: 1.125rem;
+  border-radius: 0.75rem;
 }

@@ -4,63 +4,85 @@ import './gridMenu.css'
 
 function preloadGame1() {
   void import('@/views/Game1')
+  void import('@/views/Game1/Game1LevelSelect')
 }
 function preloadGame2() {
   void import('@/views/Game2')
+  void import('@/views/Game2/Game2LevelSelect')
 }
 function preloadGame4() {
   void import('@/views/Game4')
+  void import('@/views/Game4/Game4LevelSelect')
 }
-function preloadGame5() {
-  void import('@/views/Game5')
-}
-function preloadGame6() {
-  void import('@/views/Game6')
-}
+
+const GAMES = [
+  {
+    to: '/game1',
+    preload: preloadGame1,
+    title: 'Sílaba que Falta',
+    description: 'Escucha la palabra y elige la sílaba correcta para completarla',
+    color: '#3b82f6',
+    preview: (
+      <div className="gmi-preview gmi-preview--blue">
+        <span className="gmi-tile">CA</span>
+        <span className="gmi-tile gmi-tile--blank">?</span>
+        <span className="gmi-tile">TA</span>
+      </div>
+    ),
+  },
+  {
+    to: '/game2',
+    preload: preloadGame2,
+    title: 'Ordena las Sílabas',
+    description: 'Arrastra las sílabas para formar la palabra en el orden correcto',
+    color: '#10b981',
+    preview: (
+      <div className="gmi-preview gmi-preview--green">
+        <span className="gmi-tile gmi-tile--dragging">RRO</span>
+        <span className="gmi-tile">PE</span>
+        <span className="gmi-arrow">→</span>
+        <span className="gmi-tile">PE</span>
+        <span className="gmi-tile">RRO</span>
+      </div>
+    ),
+  },
+  {
+    to: '/game4',
+    preload: preloadGame4,
+    title: 'Identificación Visual',
+    description: 'Encuentra todas las letras iguales a la letra modelo',
+    color: '#f59e0b',
+    preview: (
+      <div className="gmi-preview gmi-preview--amber">
+        <span className="gmi-letter gmi-letter--target">p</span>
+        <span className="gmi-letter gmi-letter--distractor">q</span>
+        <span className="gmi-letter gmi-letter--target">p</span>
+      </div>
+    ),
+  },
+]
 
 export default function GridMenu() {
   return (
-    <ul className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4">
-      <Link
-        to="/game1"
-        className="gmi-link"
-        onMouseEnter={preloadGame1}
-        onFocus={preloadGame1}
-      >
-        <GridMenuItem key="1" />
-      </Link>
-      <Link
-        to="/game2"
-        className="gmi-link"
-        onMouseEnter={preloadGame2}
-        onFocus={preloadGame2}
-      >
-        <GridMenuItem key="2" />
-      </Link>
-      <Link
-        to="/game4"
-        className="gmi-link"
-        onMouseEnter={preloadGame4}
-        onFocus={preloadGame4}
-      >
-        <GridMenuItem key="3" />
-      </Link>
-      <Link
-        to="/game5"
-        className="gmi-link"
-        onMouseEnter={preloadGame5}
-        onFocus={preloadGame5}
-      >
-        <GridMenuItem key="4" />
-      </Link>
-      <Link
-        to="/game6"
-        className="gmi-link"
-        onMouseEnter={preloadGame6}
-        onFocus={preloadGame6}
-      >
-        <GridMenuItem key="5" />
-      </Link>
+    <ul className="gmi-grid" role="list">
+      {GAMES.map((game) => (
+        <li key={game.to}>
+          <Link
+            to={game.to}
+            className="gmi-link"
+            onMouseEnter={game.preload}
+            onFocus={game.preload}
+            aria-label={game.title}
+          >
+            <GridMenuItem
+              title={game.title}
+              description={game.description}
+              color={game.color}
+              preview={game.preview}
+            />
+          </Link>
+        </li>
+      ))}
     </ul>
   )
 }
