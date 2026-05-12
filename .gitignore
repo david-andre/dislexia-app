@@ -17,10 +17,23 @@
 
 # misc
 .DS_Store
+.agents/
+.claude/
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
+
+# editor
+.vscode/
+.idea/
+
+# tooling
+skills-lock.json
+
+# build artifacts
+tsconfig.tsbuildinfo
+.eslintcache
 
 npm-debug.log*
 yarn-debug.log*
