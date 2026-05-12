@@ -4,7 +4,9 @@
 @tailwind utilities;
 
 /* Prevents white flash before React mounts */
-body {
+html, body, #root {
+  height: 100%;
+  overflow: hidden;
   background-color: #5b9bd5;
 }
 

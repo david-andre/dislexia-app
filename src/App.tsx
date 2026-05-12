@@ -4,9 +4,8 @@ import Navbar from '@/components/Navbar'
 import { ProtectedRoute } from '@/components/ProtectedRoute'
 import LoginRegister from '@/features/auth/LoginRegister'
 
-const MainPage = lazy(() => import('@/views/MainPage'))
+const Children = lazy(() => import('@/views/Children'))
 const GamesMenu = lazy(() => import('@/views/GamesMenu'))
-const Statistics = lazy(() => import('@/views/Statistics'))
 const Game1LevelSelect = lazy(() => import('@/views/Game1/Game1LevelSelect'))
 const Game1 = lazy(() => import('@/views/Game1'))
 const Game2LevelSelect = lazy(() => import('@/views/Game2/Game2LevelSelect'))
@@ -14,11 +13,12 @@ const Game2 = lazy(() => import('@/views/Game2'))
 const Game3 = lazy(() => import('@/views/Game3'))
 const Game4LevelSelect = lazy(() => import('@/views/Game4/Game4LevelSelect'))
 const Game4 = lazy(() => import('@/views/Game4'))
+const Profile = lazy(() => import('@/views/Profile'))
 
 function PageLoader() {
   return (
     <div
-      className="flex flex-col items-center justify-center gap-5 min-h-screen"
+      className="flex flex-col items-center justify-center gap-5 min-h-full"
       style={{ background: 'linear-gradient(135deg, #5b9bd5 0%, #7bb8e8 50%, #a8d4f0 100%)' }}
     >
       <div className="page-loader-spinner" />
@@ -35,16 +35,17 @@ function PageLoader() {
 export default function App() {
   return (
     <BrowserRouter>
-      <div className="bg-gray-100">
+      <div className="h-screen flex flex-col overflow-hidden">
         <Navbar />
+        <div className="flex-1 overflow-y-auto">
         <Suspense fallback={<PageLoader />}>
           <Routes>
             <Route path="/" element={<LoginRegister />} />
             <Route
-              path="/main-page"
+              path="/children"
               element={
                 <ProtectedRoute>
-                  <MainPage />
+                  <Children />
                 </ProtectedRoute>
               }
             />
@@ -53,14 +54,6 @@ export default function App() {
               element={
                 <ProtectedRoute>
                   <GamesMenu />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/statistics"
-              element={
-                <ProtectedRoute>
-                  <Statistics />
                 </ProtectedRoute>
               }
             />
@@ -120,12 +113,20 @@ export default function App() {
                 </ProtectedRoute>
               }
             />
+            <Route
+              path="/profile"
+              element={
+                <ProtectedRoute>
+                  <Profile />
+                </ProtectedRoute>
+              }
+            />
             <Route path="/game5" element={<Navigate to="/game4" replace />} />
             <Route path="/game6" element={<Navigate to="/game4" replace />} />
-            <Route path="/stadistics" element={<Navigate to="/statistics" replace />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </Suspense>
+        </div>
       </div>
     </BrowserRouter>
   )

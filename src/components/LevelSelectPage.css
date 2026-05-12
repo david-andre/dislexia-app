@@ -1,0 +1,86 @@
+.level-card {
+  position: relative;
+  background: var(--card-color, #f59e0b);
+  border-radius: 1.25rem;
+  padding: 1rem 0.75rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 9rem;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.28);
+  border: 3px solid rgba(255, 255, 255, 0.35);
+  cursor: pointer;
+  transition: transform 0.14s ease, box-shadow 0.14s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.level-card:hover {
+  transform: scale(1.06) translateY(-3px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.32);
+}
+
+.level-card:active {
+  transform: scale(0.96);
+}
+
+.level-card--done {
+  border-color: rgba(255, 235, 100, 0.7);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.28), 0 0 0 2px rgba(255, 235, 100, 0.4);
+}
+
+.level-card__number {
+  font-family: 'Luckiest Guy', cursive;
+  font-size: clamp(2.5rem, 9vw, 3.75rem);
+  color: rgba(255, 255, 255, 0.95);
+  line-height: 1;
+  text-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+}
+
+.level-card__title {
+  font-family: 'Luckiest Guy', cursive;
+  font-size: clamp(0.7rem, 2.5vw, 0.85rem);
+  color: rgba(255, 255, 255, 0.9);
+  text-align: center;
+  line-height: 1.25;
+  word-break: break-word;
+}
+
+.level-card__subtitle {
+  font-family: 'Luckiest Guy', cursive;
+  font-size: clamp(0.85rem, 3vw, 1.1rem);
+  color: #fef08a;
+  text-align: center;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+}
+
+.level-card__stars {
+  display: flex;
+  gap: 0.1rem;
+  font-size: 1.15rem;
+}
+
+.level-card__star--filled {
+  color: #fef08a;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+}
+
+.level-card__star--empty {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.level-card__check {
+  position: absolute;
+  top: 0.45rem;
+  right: 0.55rem;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 50%;
+  width: 1.4rem;
+  height: 1.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  color: white;
+  font-weight: 900;
+}

@@ -17,7 +17,7 @@
 
   background: var(--game1-bg);
   background-color: #5b9bd5;
-  min-height: 100vh;
+  min-height: 100%;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
 }
 

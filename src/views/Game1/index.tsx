@@ -36,7 +36,7 @@ export default function Game1() {
   if (!level) return null
 
   return (
-    <div className="g1 h-screen overflow-auto">
+    <div className="g1 h-full overflow-auto">
       <div
         aria-live="polite"
         aria-atomic="true"

@@ -42,7 +42,7 @@ export default function Game2() {
   if (!level) return null
 
   return (
-    <div className="g1 g2 h-screen overflow-auto pb-8">
+    <div className="g1 g2 h-full overflow-auto pb-8">
       <div aria-live="polite" aria-atomic="true" className="sr-only" role="status">
         Palabra {score.correct + 1} de {questions.length}
       </div>

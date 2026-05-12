@@ -3,7 +3,7 @@ import LinkButton from '@/components/LinkButton'
 
 export default function Game3() {
   return (
-    <div className="h-screen bg-gray-200 text-center mb-12">
+    <div className="h-full bg-gray-200 text-center mb-12">
       <div className="inline-flex space-x-16 mb-12">
         <LinkButton
           to="/games"

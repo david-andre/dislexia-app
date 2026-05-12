@@ -11,7 +11,7 @@ const jumbotronProps = {
 
 export default function GamesMenu() {
   return (
-    <div className="g1 min-h-screen px-4 pt-6 pb-12">
+    <div className="g1 min-h-full px-4 pt-6 pb-12">
       <div className="flex items-center justify-between mb-10">
         <LinkButton
           to="/main-page"
@@ -22,11 +22,11 @@ export default function GamesMenu() {
         />
         <AnimatedJumbotron features={jumbotronProps} />
         <LinkButton
-          to="/statistics"
+          to="/profile"
           icon="chart"
           color="bg-amber-500 hover:bg-amber-600"
           fontSize="text-2xl p-3 min-w-[3rem] min-h-[3rem]"
-          ariaLabel="Ver estadísticas"
+          ariaLabel="Ver perfil de habilidades"
         />
       </div>
       <GridMenu />

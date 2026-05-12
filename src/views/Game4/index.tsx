@@ -36,7 +36,7 @@ export default function Game4() {
   if (!level || !question) return null
 
   return (
-    <div className="g1 g4 min-h-screen pb-8">
+    <div className="g1 g4 min-h-full pb-8">
       <div aria-live="assertive" aria-atomic="true" className="sr-only">
         {a11yAnnouncement}
       </div>

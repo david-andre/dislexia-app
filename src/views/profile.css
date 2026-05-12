@@ -1,0 +1,139 @@
+/* Profile page — uses .g1 background from game1.css */
+
+/* ── Cards ───────────────────────────────────────────────────────────────── */
+
+.profile-card {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 1.25rem;
+  padding: 1.5rem;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  border: 2px solid rgba(255, 255, 255, 0.6);
+}
+
+/* ── Skill row ────────────────────────────────────────────────────────────── */
+
+.skill-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.85rem 1rem;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 1rem;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.6);
+}
+
+.skill-row-accent {
+  width: 0.35rem;
+  border-radius: 9999px;
+  align-self: stretch;
+  flex-shrink: 0;
+}
+
+.skill-row-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.skill-row-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.4rem;
+}
+
+.skill-row-label {
+  font-family: 'Luckiest Guy', cursive;
+  font-size: clamp(0.85rem, 2.5vw, 1rem);
+  color: #1e3a5f;
+  line-height: 1.2;
+}
+
+.skill-row-score {
+  font-family: 'Luckiest Guy', cursive;
+  font-size: clamp(1.25rem, 4vw, 1.6rem);
+  line-height: 1;
+  color: #1e3a5f;
+  flex-shrink: 0;
+}
+
+/* Progress bar track */
+.skill-bar-track {
+  height: 0.55rem;
+  background: rgba(30, 58, 95, 0.1);
+  border-radius: 9999px;
+  overflow: hidden;
+  margin-bottom: 0.35rem;
+}
+
+.skill-bar-fill {
+  height: 100%;
+  border-radius: 9999px;
+  transition: width 0.6s ease;
+}
+
+.skill-row-meta {
+  font-size: 0.72rem;
+  color: #64748b;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.skill-confidence-badge {
+  font-size: 0.68rem;
+  padding: 0.1rem 0.45rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.skill-confidence-badge--none {
+  background: #f1f5f9;
+  color: #94a3b8;
+}
+
+.skill-confidence-badge--partial {
+  background: #fef9c3;
+  color: #a16207;
+}
+
+.skill-confidence-badge--full {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+/* ── Interpretation ───────────────────────────────────────────────────────── */
+
+.interpretation-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.interpretation-group {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.interpretation-dot {
+  width: 0.65rem;
+  height: 0.65rem;
+  border-radius: 50%;
+  margin-top: 0.3rem;
+  flex-shrink: 0;
+}
+
+.interpretation-label {
+  font-size: 0.78rem;
+  color: #475569;
+  line-height: 1.5;
+}
+
+.interpretation-label strong {
+  color: #1e3a5f;
+  font-weight: 700;
+}

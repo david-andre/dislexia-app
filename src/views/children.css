@@ -1,0 +1,266 @@
+/* Children management screen */
+
+.children-page {
+  --children-bg: linear-gradient(135deg, #5b9bd5 0%, #7bb8e8 50%, #a8d4f0 100%);
+  background: var(--children-bg);
+  background-color: #5b9bd5;
+  min-height: 100%;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
+}
+
+/* ── Child card ─────────────────────────────────────────────────────────────── */
+
+.child-card {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 1.25rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  transition: transform 0.15s, box-shadow 0.15s;
+  position: relative;
+}
+
+.child-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.child-avatar {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: white;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+  flex-shrink: 0;
+}
+
+.child-name {
+  font-family: 'Luckiest Guy', cursive;
+  font-size: clamp(1.1rem, 3vw, 1.3rem);
+  color: #1e3a5f;
+  text-align: center;
+  line-height: 1.2;
+  text-shadow: none;
+}
+
+.child-age {
+  font-size: 0.85rem;
+  color: #64748b;
+  text-shadow: none;
+}
+
+.child-play-btn {
+  width: 100%;
+  padding: 0.6rem 1rem;
+  border-radius: 0.75rem;
+  background: #f59e0b;
+  color: white;
+  font-family: 'Luckiest Guy', cursive;
+  font-size: 1.1rem;
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.child-play-btn:hover {
+  background: #d97706;
+}
+
+.child-play-btn:active {
+  transform: scale(0.97);
+}
+
+.child-actions {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.child-action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 0.6rem;
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+}
+
+.child-action-btn:active {
+  transform: scale(0.93);
+}
+
+.child-action-btn--edit {
+  background: #e0f2fe;
+  color: #0369a1;
+}
+
+.child-action-btn--edit:hover {
+  background: #bae6fd;
+}
+
+.child-action-btn--delete {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.child-action-btn--delete:hover {
+  background: #fecaca;
+}
+
+/* ── Add child card ──────────────────────────────────────────────────────────── */
+
+.child-add-card {
+  background: rgba(255, 255, 255, 0.35);
+  border: 3px dashed rgba(255, 255, 255, 0.7);
+  border-radius: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  min-height: 200px;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.15s;
+  color: white;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.child-add-card:hover {
+  background: rgba(255, 255, 255, 0.5);
+  transform: translateY(-2px);
+}
+
+.child-add-card:active {
+  transform: scale(0.97);
+}
+
+/* ── Empty state ─────────────────────────────────────────────────────────────── */
+
+.children-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 3rem 1rem;
+  color: white;
+  text-align: center;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* ── Modal ───────────────────────────────────────────────────────────────────── */
+
+.child-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  padding: 1rem;
+}
+
+.child-modal {
+  background: white;
+  border-radius: 1.5rem;
+  padding: 2rem;
+  width: 100%;
+  max-width: 26rem;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.child-modal__title {
+  font-family: 'Luckiest Guy', cursive;
+  font-size: 1.5rem;
+  color: #1e3a5f;
+  text-align: center;
+}
+
+.child-modal__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.child-modal__label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+.child-modal__input {
+  padding: 0.65rem 0.9rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 0.75rem;
+  font-size: 1rem;
+  color: #1e293b;
+  transition: border-color 0.15s;
+  outline: none;
+}
+
+.child-modal__input:focus {
+  border-color: #3b82f6;
+}
+
+.child-modal__input--error {
+  border-color: #ef4444;
+}
+
+.child-modal__error {
+  font-size: 0.8rem;
+  color: #ef4444;
+}
+
+.child-modal__actions {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: flex-end;
+}
+
+.child-modal__btn {
+  padding: 0.6rem 1.4rem;
+  border-radius: 0.75rem;
+  font-family: 'Luckiest Guy', cursive;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+}
+
+.child-modal__btn:active {
+  transform: scale(0.96);
+}
+
+.child-modal__btn--primary {
+  background: #1e3a5f;
+  color: white;
+}
+
+.child-modal__btn--primary:hover {
+  background: #163059;
+}
+
+.child-modal__btn--secondary {
+  background: #f1f5f9;
+  color: #374151;
+}
+
+.child-modal__btn--secondary:hover {
+  background: #e2e8f0;
+}

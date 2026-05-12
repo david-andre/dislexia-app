@@ -1,61 +1,28 @@
 import { useState, useCallback } from 'react'
 import { Volume2 } from 'lucide-react'
 
-import mi from '@/assets/audio/mi.mp3'
-import ni from '@/assets/audio/ni.mp3'
-import ti from '@/assets/audio/ti.mp3'
-import se from '@/assets/audio/se.mp3'
-import ce from '@/assets/audio/ce.mp3'
-import te from '@/assets/audio/te.mp3'
-import ta from '@/assets/audio/ta.mp3'
-import re from '@/assets/audio/re.mp3'
-import me from '@/assets/audio/me.mp3'
-import ne from '@/assets/audio/ne.mp3'
-import pe from '@/assets/audio/pe.mp3'
-import mo from '@/assets/audio/mo.mp3'
-import po from '@/assets/audio/po.mp3'
-import fo from '@/assets/audio/fo.mp3'
-import ca from '@/assets/audio/ca.mp3'
-import ra from '@/assets/audio/ra.mp3'
-import ro from '@/assets/audio/ro.mp3'
-import flo from '@/assets/audio/flo.mp3'
-import mio from '@/assets/audio/mio.mp3'
-import le from '@/assets/audio/le.mp3'
-import no from '@/assets/audio/no.mp3'
-import qu from '@/assets/audio/qu.mp3'
-import eme from '@/assets/audio/eme.mp3'
-import ene from '@/assets/audio/ene.mp3'
-import be from '@/assets/audio/be.mp3'
-import de from '@/assets/audio/de.mp3'
+// Resolve audio asset URLs at module load; audio data is only fetched on play (bundle-conditional)
+const audioAssets = import.meta.glob('../../assets/audio/*.mp3', {
+  eager: true,
+  query: '?url',
+  import: 'default',
+}) as Record<string, string>
 
-const AUDIO_MAP: Record<string, string> = {
-  MI: mi,
-  NI: ni,
-  TI: ti,
-  SE: se,
-  CE: ce,
-  TE: te,
-  TA: ta,
-  RE: re,
-  ME: me,
-  NE: ne,
-  PE: pe,
-  MO: mo,
-  PO: po,
-  FO: fo,
-  CA: ca,
-  RA: ra,
-  RO: ro,
-  FLO: flo,
-  MIO: mio,
-  'LÉ': le,
-  NO: no,
-  m: eme,
-  n: ene,
-  b: be,
-  d: de,
-  q: qu,
-  p: pe,
+// Keys whose filename differs from key.toLowerCase()
+const FILENAME_OVERRIDES: Record<string, string> = {
+  'LÉ': 'le',
+  m: 'eme',
+  n: 'ene',
+  b: 'be',
+  d: 'de',
+  q: 'qu',
+  p: 'pe',
+}
+
+function getAudioUrl(key: string): string | undefined {
+  const filename =
+    FILENAME_OVERRIDES[key] ?? FILENAME_OVERRIDES[key.toLowerCase()] ?? key.toLowerCase()
+  return audioAssets[`../../assets/audio/${filename}.mp3`]
 }
 
 interface CardProps {
@@ -70,10 +37,9 @@ export default function Card({ content, handleClick, changeBg, Bg, backgroundCol
   const [bg, setBg] = useState('card bg-red-600')
 
   const playAudio = useCallback(() => {
-    const src = AUDIO_MAP[content] ?? AUDIO_MAP[content.toLowerCase()]
-    if (!src) return
-    const audio = new Audio(src)
-    audio.play().catch(() => {})
+    const url = getAudioUrl(content)
+    if (!url) return
+    new Audio(url).play().catch(() => {})
   }, [content])
 
   const toggleBg = useCallback(() => {
