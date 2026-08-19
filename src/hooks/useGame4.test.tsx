@@ -11,10 +11,6 @@ vi.mock('react-router-dom', async () => {
   return { ...actual, useNavigate: () => mockNavigate }
 })
 
-vi.mock('@/hooks/useSubmitActivity', () => ({
-  useSubmitActivity: () => ({ mutate: vi.fn() }),
-}))
-
 function wrapper({ children }: { children: React.ReactNode }) {
   return (
     <MemoryRouter initialEntries={['/game4/level/1']}>
@@ -30,7 +26,9 @@ const INVALID = [2, 4]
 describe('useGame4', () => {
   beforeEach(() => {
     vi.clearAllMocks()
-    useAuthStore.setState({ selectedChild: null })
+    useAuthStore.setState({
+      selectedChild: { id: 'child-1', nombre: 'Test', apellido: 'Niño' },
+    })
     useGame4ProgressStore.setState({ byChild: {} })
   })
 
@@ -104,7 +102,7 @@ describe('useGame4', () => {
     act(() => { result.current.handleVictoryClose() })
     expect(mockNavigate).toHaveBeenCalledWith('/game4')
     const store = useGame4ProgressStore.getState()
-    expect(store.getLevelResult('default', '1')).toMatchObject({ stars: 3, correct: 1, incorrect: 0 })
+    expect(store.getLevelResult('child-1', '1')).toMatchObject({ stars: 3, correct: 1, incorrect: 0 })
   })
 
   it('handleShowInstructions and handleCloseInstructions toggle modal', () => {

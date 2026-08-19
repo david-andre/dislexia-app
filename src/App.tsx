@@ -52,7 +52,7 @@ export default function App() {
             <Route
               path="/games"
               element={
-                <ProtectedRoute>
+                <ProtectedRoute requireChild>
                   <GamesMenu />
                 </ProtectedRoute>
               }
@@ -60,7 +60,7 @@ export default function App() {
             <Route
               path="/game1"
               element={
-                <ProtectedRoute>
+                <ProtectedRoute requireChild>
                   <Game1LevelSelect />
                 </ProtectedRoute>
               }
@@ -68,7 +68,7 @@ export default function App() {
             <Route
               path="/game1/level/:levelId"
               element={
-                <ProtectedRoute>
+                <ProtectedRoute requireChild>
                   <Game1 />
                 </ProtectedRoute>
               }
@@ -76,7 +76,7 @@ export default function App() {
             <Route
               path="/game2"
               element={
-                <ProtectedRoute>
+                <ProtectedRoute requireChild>
                   <Game2LevelSelect />
                 </ProtectedRoute>
               }
@@ -84,7 +84,7 @@ export default function App() {
             <Route
               path="/game2/level/:levelId"
               element={
-                <ProtectedRoute>
+                <ProtectedRoute requireChild>
                   <Game2 />
                 </ProtectedRoute>
               }
@@ -92,7 +92,7 @@ export default function App() {
             <Route
               path="/game3"
               element={
-                <ProtectedRoute>
+                <ProtectedRoute requireChild>
                   <Game3 />
                 </ProtectedRoute>
               }
@@ -100,7 +100,7 @@ export default function App() {
             <Route
               path="/game4"
               element={
-                <ProtectedRoute>
+                <ProtectedRoute requireChild>
                   <Game4LevelSelect />
                 </ProtectedRoute>
               }
@@ -108,7 +108,7 @@ export default function App() {
             <Route
               path="/game4/level/:levelId"
               element={
-                <ProtectedRoute>
+                <ProtectedRoute requireChild>
                   <Game4 />
                 </ProtectedRoute>
               }
@@ -116,7 +116,7 @@ export default function App() {
             <Route
               path="/profile"
               element={
-                <ProtectedRoute>
+                <ProtectedRoute requireChild>
                   <Profile />
                 </ProtectedRoute>
               }

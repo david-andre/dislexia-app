@@ -19,7 +19,7 @@ export default function LoginRegister() {
   const setUser = useAuthStore((s) => s.setUser)
   const navigate = useNavigate()
 
-  const { register, handleSubmit, formState: { errors }, setError, reset } = useForm<FormData>({
+  const { register, handleSubmit, formState: { errors }, reset } = useForm<FormData>({
     resolver: zodResolver(schema),
     defaultValues: { username: '', password: '' },
   })

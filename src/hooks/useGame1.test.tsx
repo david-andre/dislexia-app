@@ -14,12 +14,6 @@ vi.mock('react-router-dom', async () => {
   }
 })
 
-vi.mock('@/hooks/useSubmitActivity', () => ({
-  useSubmitActivity: () => ({
-    mutate: vi.fn(),
-  }),
-}))
-
 function wrapper({ children }: { children: React.ReactNode }) {
   return (
     <MemoryRouter initialEntries={['/game1/level/1']}>

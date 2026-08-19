@@ -24,7 +24,7 @@ interface LevelSelectPageProps {
   levels: Level[]
   basePath: string
   bgClass: string
-  getLevelResult: (childId: string, levelId: string) => { stars: number } | undefined
+  getLevelResult: (childId: string, levelId: string) => { stars: number } | null | undefined
   childId: string
 }
 

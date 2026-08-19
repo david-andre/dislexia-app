@@ -2,13 +2,7 @@ import { useState, useCallback, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuthStore } from '@/stores/authStore'
 import { useGame1ProgressStore } from '@/stores/game1ProgressStore'
-import { useSubmitActivity } from '@/hooks/useSubmitActivity'
-import {
-  GAME1_LEVELS,
-  ACTIVITY_NAME,
-  WINNING_THRESHOLD,
-  getStars,
-} from '@/games/game1'
+import { GAME1_LEVELS, WINNING_THRESHOLD, getStars } from '@/games/game1'
 import type { Game1Level } from '@/games/game1'
 
 /** Map level options to the shape CardsList expects (val = isCorrect) */
@@ -47,7 +41,6 @@ export function useGame1(levelId: string | undefined): UseGame1Result {
   const navigate = useNavigate()
   const selectedChild = useAuthStore((s) => s.selectedChild)
   const setLevelResult = useGame1ProgressStore((s) => s.setLevelResult)
-  const submitActivity = useSubmitActivity()
 
   const level = levelId ? GAME1_LEVELS.find((l) => l.id === levelId) ?? null : null
   const questions = level?.questions ?? []
@@ -109,22 +102,16 @@ export function useGame1(levelId: string | undefined): UseGame1Result {
 
   const handleVictoryClose = useCallback(() => {
     if (!victory || !levelId) return
-    const stars = getStars(victory.incorrect)
-    const childId = selectedChild?.id ?? 'default'
-    setLevelResult(childId, levelId, {
-      stars,
-      correct: victory.correct,
-      incorrect: victory.incorrect,
-    })
-    submitActivity.mutate({
-      nombre: ACTIVITY_NAME,
-      correctas: victory.correct,
-      incorrectas: victory.incorrect,
-      usuario: selectedChild?.id ?? '',
-    })
+    if (selectedChild) {
+      setLevelResult(selectedChild.id, levelId, {
+        stars: getStars(victory.incorrect),
+        correct: victory.correct,
+        incorrect: victory.incorrect,
+      })
+    }
     setVictory(null)
     navigate('/game1')
-  }, [victory, levelId, selectedChild, setLevelResult, submitActivity, navigate])
+  }, [victory, levelId, selectedChild, setLevelResult, navigate])
 
   const validateAnswer = useCallback(() => {
     const correct = wordOptions[0]?.find((o) => o.val === true)

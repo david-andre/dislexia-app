@@ -10,14 +10,3 @@ export interface Child {
   edad?: number
 }
 
-export interface ActivityPayload {
-  nombre: string
-  correctas: number
-  incorrectas: number
-  usuario: string
-}
-
-export interface ReportItem {
-  incorrectas: number
-  [key: string]: unknown
-}

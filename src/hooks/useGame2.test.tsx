@@ -14,10 +14,6 @@ vi.mock('react-router-dom', async () => {
   }
 })
 
-vi.mock('@/hooks/useSubmitActivity', () => ({
-  useSubmitActivity: () => ({ mutate: vi.fn() }),
-}))
-
 // Audio is not available in jsdom
 vi.stubGlobal('Audio', vi.fn(() => ({ play: vi.fn().mockResolvedValue(undefined) })))
 
@@ -47,7 +43,9 @@ function answerCorrectly(result: ReturnType<typeof useGame2>, questionIndex: num
 describe('useGame2', () => {
   beforeEach(() => {
     vi.clearAllMocks()
-    useAuthStore.setState({ selectedChild: null })
+    useAuthStore.setState({
+      selectedChild: { id: 'child-1', nombre: 'Test', apellido: 'Niño' },
+    })
     useGame2ProgressStore.setState({ byChild: {} })
   })
 
@@ -133,7 +131,7 @@ describe('useGame2', () => {
     act(() => { result.current.handleVictoryClose() })
     expect(mockNavigate).toHaveBeenCalledWith('/game2')
     const store = useGame2ProgressStore.getState()
-    expect(store.getLevelResult('default', '1')).toMatchObject({ stars: 3, correct: 5, incorrect: 0 })
+    expect(store.getLevelResult('child-1', '1')).toMatchObject({ stars: 3, correct: 5, incorrect: 0 })
   })
 
   it('handleShowInstructions and handleCloseInstructions toggle modal', () => {

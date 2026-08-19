@@ -2,13 +2,7 @@ import { useState, useCallback, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuthStore } from '@/stores/authStore'
 import { useGame4ProgressStore } from '@/stores/game4ProgressStore'
-import { useSubmitActivity } from '@/hooks/useSubmitActivity'
-import {
-  GAME4_LEVELS,
-  ACTIVITY_NAME,
-  getValidIndices,
-  getStars,
-} from '@/games/game4'
+import { GAME4_LEVELS, getValidIndices, getStars } from '@/games/game4'
 import type { Game4Level, Game4Question } from '@/games/game4'
 
 export interface UseGame4Result {
@@ -35,7 +29,6 @@ export function useGame4(levelId: string | undefined): UseGame4Result {
   const navigate = useNavigate()
   const selectedChild = useAuthStore((s) => s.selectedChild)
   const setLevelResult = useGame4ProgressStore((s) => s.setLevelResult)
-  const submitActivity = useSubmitActivity()
 
   const level = levelId ? GAME4_LEVELS.find((l) => l.id === levelId) ?? null : null
 
@@ -99,21 +92,16 @@ export function useGame4(levelId: string | undefined): UseGame4Result {
 
   const handleVictoryClose = useCallback(() => {
     if (!victory || !level) return
-    const stars = getStars(victory.incorrect)
-    setLevelResult(selectedChild?.id ?? 'default', level.id, {
-      stars,
-      correct: victory.correct,
-      incorrect: victory.incorrect,
-    })
-    submitActivity.mutate({
-      nombre: ACTIVITY_NAME,
-      correctas: victory.correct,
-      incorrectas: victory.incorrect,
-      usuario: selectedChild?.id ?? '',
-    })
+    if (selectedChild) {
+      setLevelResult(selectedChild.id, level.id, {
+        stars: getStars(victory.incorrect),
+        correct: victory.correct,
+        incorrect: victory.incorrect,
+      })
+    }
     setVictory(null)
     navigate('/game4')
-  }, [victory, level, selectedChild, setLevelResult, submitActivity, navigate])
+  }, [victory, level, selectedChild, setLevelResult, navigate])
 
   const handleShowInstructions = useCallback(() => setShowInstructions(true), [])
   const handleCloseInstructions = useCallback(() => setShowInstructions(false), [])

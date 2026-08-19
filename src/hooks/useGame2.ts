@@ -2,14 +2,8 @@ import { useReducer, useCallback, useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuthStore } from '@/stores/authStore'
 import { useGame2ProgressStore } from '@/stores/game2ProgressStore'
-import { useSubmitActivity } from '@/hooks/useSubmitActivity'
 import { getStars } from '@/games/game1'
-import {
-  GAME2_LEVELS,
-  ACTIVITY_NAME,
-  WINNING_THRESHOLD,
-  checkOrder,
-} from '@/games/game2'
+import { GAME2_LEVELS, WINNING_THRESHOLD, checkOrder } from '@/games/game2'
 import type { Game2Question, Game2Level } from '@/games/game2'
 
 interface Task {
@@ -124,7 +118,6 @@ export function useGame2(levelId: string | undefined): UseGame2Result {
   const navigate = useNavigate()
   const selectedChild = useAuthStore((s) => s.selectedChild)
   const setLevelResult = useGame2ProgressStore((s) => s.setLevelResult)
-  const submitActivity = useSubmitActivity()
 
   const level = levelId ? GAME2_LEVELS.find((l) => l.id === levelId) ?? null : null
   const questions = level?.questions ?? []
@@ -194,21 +187,16 @@ export function useGame2(levelId: string | undefined): UseGame2Result {
 
   const handleVictoryClose = useCallback(() => {
     if (!victory || !level) return
-    const stars = getStars(victory.incorrect)
-    setLevelResult(selectedChild?.id ?? 'default', level.id, {
-      stars,
-      correct: victory.correct,
-      incorrect: victory.incorrect,
-    })
-    submitActivity.mutate({
-      nombre: ACTIVITY_NAME,
-      correctas: victory.correct,
-      incorrectas: victory.incorrect,
-      usuario: selectedChild?.id ?? '',
-    })
+    if (selectedChild) {
+      setLevelResult(selectedChild.id, level.id, {
+        stars: getStars(victory.incorrect),
+        correct: victory.correct,
+        incorrect: victory.incorrect,
+      })
+    }
     setVictory(null)
     navigate('/game2')
-  }, [victory, level, selectedChild, setLevelResult, submitActivity, navigate])
+  }, [victory, level, selectedChild, setLevelResult, navigate])
 
   return {
     level,
