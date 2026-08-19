@@ -10,6 +10,23 @@ Web app for dyslexia support in children. Supervisors (parents/teachers) registe
 - Auth: form exists but API calls not wired (sets a dummy user; demo mode bypasses login)
 - Game 3: UI placeholder only — the game is planned as a letter-drawing activity
 
+## Repository layout (pnpm workspaces monorepo)
+
+```
+apps/web/          — the Vite React app (@dislexia/web)
+packages/shared/   — platform-neutral TypeScript (@dislexia/shared):
+                     game level data + logic, skills engine, Zod API contracts
+apps/api/          — (future) NestJS backend, built by the user
+apps/mobile/       — (future) mobile app
+```
+
+- Run everything from the root: `pnpm dev`, `pnpm test`, `pnpm build`, `pnpm lint`
+- `@dislexia/shared` exports subpaths: `/game1`, `/game2`, `/game4`, `/skills`, `/contracts`.
+  It is consumed as TypeScript source (no build step); it must stay free of
+  DOM/React/Node APIs and bundler-specific imports
+- Audio: shared level data carries `audioKey` (e.g. `'camiseta'`); each client maps
+  keys to playable URLs (web: `apps/web/src/audio.ts` via `import.meta.glob`)
+
 ## User flow
 
 ```
@@ -23,7 +40,7 @@ Login → /children (select or create child) → /games (hub) → /gameN/level/:
 - Progress stores keep **best result only** (never overwrite a higher-star result)
 - Game and profile routes require a selected child (`<ProtectedRoute requireChild>`);
   progress is never recorded without one
-- Skills are computed **pure client-side** in `src/skills/engine.ts` — no backend dependency
+- Skills are computed **pure client-side** in `packages/shared/src/skills/engine.ts` — no backend dependency (the backend will reuse the same engine)
 - All UI text is in **Spanish**
 
 ## Stores (Zustand + localStorage)
@@ -37,7 +54,7 @@ Login → /children (select or create child) → /games (hub) → /gameN/level/:
 | `game4ProgressStore` | `dislexia-game4-progress` | byChild progress |
 
 The three game progress stores are instances of `createGameProgressStore()`
-(`src/stores/createGameProgressStore.ts`) — same shape and best-result rule, different key.
+(`apps/web/src/stores/createGameProgressStore.ts`) — same shape and best-result rule, different key.
 
 ## Games summary
 
@@ -48,7 +65,7 @@ The three game progress stores are instances of `createGameProgressStore()`
 | `/game3` | Letter drawing | Draw the letter on canvas (TODO) | — |
 | `/game4/level/:levelId` | Visual discrimination | Tap all cards matching target letter | 1 question per level |
 
-## Skills engine (`src/skills/`)
+## Skills engine (`packages/shared/src/skills/`)
 
 5 skills, each is `{ score: 0-100, confidence: 0-1 }`. See `docs/skills.md` for full formulas.
 
@@ -76,4 +93,10 @@ The three game progress stores are instances of `createGameProgressStore()`
 
 ## Tech stack
 
-Vite · React 18 · TypeScript · React Router v6 · Zustand · TanStack Query · React Hook Form + Zod · Tailwind CSS · Chart.js · SweetAlert2
+pnpm workspaces · Vite 8 · React 18 · TypeScript · React Router v7 · Zustand · TanStack Query · React Hook Form + Zod · Tailwind CSS · Chart.js · SweetAlert2
+
+## Collaboration model
+
+Claude does all frontend work (web + future mobile). The user builds the backend
+(NestJS + Prisma) and CI/CD himself as a learning project — Claude mentors and
+reviews backend code but does not write it.

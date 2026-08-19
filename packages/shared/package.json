@@ -1,0 +1,24 @@
+{
+  "name": "@dislexia/shared",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./game1": "./src/games/game1/index.ts",
+    "./game2": "./src/games/game2/index.ts",
+    "./game4": "./src/games/game4/index.ts",
+    "./skills": "./src/skills/index.ts",
+    "./contracts": "./src/contracts/index.ts"
+  },
+  "scripts": {
+    "test": "vitest run",
+    "build": "tsc --noEmit"
+  },
+  "dependencies": {
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "typescript": "~5.6.2",
+    "vitest": "^4.1.0"
+  }
+}

@@ -2,8 +2,8 @@ import { useState, useCallback, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuthStore } from '@/stores/authStore'
 import { useGame4ProgressStore } from '@/stores/game4ProgressStore'
-import { GAME4_LEVELS, getValidIndices, getStars } from '@/games/game4'
-import type { Game4Level, Game4Question } from '@/games/game4'
+import { GAME4_LEVELS, getValidIndices, getStars } from '@dislexia/shared/game4'
+import type { Game4Level, Game4Question } from '@dislexia/shared/game4'
 
 export interface UseGame4Result {
   level: Game4Level | null

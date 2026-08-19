@@ -1,4 +1,4 @@
-import { GAME4_LEVELS } from '@/games/game4'
+import { GAME4_LEVELS } from '@dislexia/shared/game4'
 import { useAuthStore } from '@/stores/authStore'
 import { useGame4ProgressStore } from '@/stores/game4ProgressStore'
 import LevelSelectPage from '@/components/LevelSelectPage'

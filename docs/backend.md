@@ -3,11 +3,20 @@
 ## Stack decision
 
 - **NestJS** (TypeScript, modular architecture)
-- **PostgreSQL** as database (recommended: via TypeORM or Prisma)
-- **JWT** for auth (supervisor sessions)
-- Separate repository from the frontend
+- **PostgreSQL** via **Prisma**
+- **JWT** for auth — Bearer token in the `Authorization` header (not cookies:
+  works identically on web and mobile)
+- Lives in this monorepo at `apps/api` (workspace package `@dislexia/api`)
+- Request/response shapes come from **`@dislexia/shared/contracts`** (Zod schemas) —
+  validate bodies with them (e.g. via `nestjs-zod`) instead of hand-written DTOs,
+  so frontend and backend can never drift
 
 The frontend expects the backend at `VITE_API_URL` (default `http://localhost:4000`).
+
+> **Learning plan**: the user builds this himself. Phase 1 is a modular monolith
+> (auth → children → results → skills). Later phases extract the skills
+> computation into a separate service behind a message broker, then add
+> observability and CD. Milestone specs are agreed in-session with Claude.
 
 ---
 
@@ -26,6 +35,11 @@ src/
 ---
 
 ## Data model
+
+> Written below as TypeORM-style entities for readability. The project uses
+> **Prisma** — translating this into `schema.prisma` (types, relations, `@unique`,
+> `@default(uuid())`, timestamps) is deliberately left as part of the user's
+> backend milestones.
 
 ### User (Supervisor)
 
@@ -128,7 +142,7 @@ All endpoints require auth. Children are scoped to the logged-in supervisor.
 |--------|------|----------|
 | GET | `/:childId` | `SkillProfile` |
 
-The backend can compute this by fetching best results per level and running the same formula as `src/skills/engine.ts`. The formula is pure math so it can be ported to TypeScript on the backend without changes.
+The backend computes this by fetching best results per level and calling `computeSkillProfile` from **`@dislexia/shared/skills`** — the exact same engine the frontend runs. Do not port or duplicate the formulas.
 
 **SkillProfile response shape:**
 ```json

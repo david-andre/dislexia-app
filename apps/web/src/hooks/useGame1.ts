@@ -2,8 +2,9 @@ import { useState, useCallback, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuthStore } from '@/stores/authStore'
 import { useGame1ProgressStore } from '@/stores/game1ProgressStore'
-import { GAME1_LEVELS, WINNING_THRESHOLD, getStars } from '@/games/game1'
-import type { Game1Level } from '@/games/game1'
+import { GAME1_LEVELS, WINNING_THRESHOLD, getStars } from '@dislexia/shared/game1'
+import { getAudioUrl } from '@/audio'
+import type { Game1Level } from '@dislexia/shared/game1'
 
 /** Map level options to the shape CardsList expects (val = isCorrect) */
 function toCardsListOptions(
@@ -74,7 +75,7 @@ export function useGame1(levelId: string | undefined): UseGame1Result {
     incorrect: number
   } | null>(null)
 
-  const currentAudioUrl = questions[score.correct]?.audioUrl
+  const currentAudioUrl = getAudioUrl(questions[score.correct]?.audioKey)
   const currentSyllables = gameWords[0] ?? []
   const currentOptionTexts = getOptionTexts(
     questions[score.correct]?.options ?? []

@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom'
-import { getStars } from '@/games/game1'
+import { getStars } from '@dislexia/shared/game1'
 import { useGame2 } from '@/hooks/useGame2'
 
 import FeedbackToast from '@/components/FeedbackToast'

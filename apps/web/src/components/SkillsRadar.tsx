@@ -9,8 +9,8 @@ import {
   Legend,
 } from 'chart.js'
 import { Radar } from 'react-chartjs-2'
-import { SKILL_KEYS, SKILL_META } from '@/skills'
-import type { SkillProfile } from '@/skills'
+import { SKILL_KEYS, SKILL_META } from '@dislexia/shared/skills'
+import type { SkillProfile } from '@dislexia/shared/skills'
 
 ChartJS.register(RadialLinearScale, PointElement, LineElement, Filler, Tooltip, Legend)
 

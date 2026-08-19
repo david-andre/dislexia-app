@@ -5,7 +5,7 @@ export interface Game2Question {
   /** Correct order for validation */
   correctOrder: string[]
   /** Path to audio file for this word */
-  audioUrl: string
+  audioKey: string
 }
 
 /** Full level content for Game2 */

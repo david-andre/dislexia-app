@@ -1,10 +1,5 @@
 import type { Game1Level } from './types'
 
-import camiseta from '@/assets/audio/camiseta.mp3'
-import pecera from '@/assets/audio/pecera.mp3'
-import florero from '@/assets/audio/florero.mp3'
-import camioneta from '@/assets/audio/camioneta.mp3'
-import telefono from '@/assets/audio/telefono.mp3'
 
 export const game1Level1: Game1Level = {
   id: '1',
@@ -17,7 +12,7 @@ export const game1Level1: Game1Level = {
         { text: 'TI', isCorrect: false },
         { text: 'NI', isCorrect: false },
       ],
-      audioUrl: camiseta,
+      audioKey: 'camiseta',
     },
     {
       syllables: ['PE', '', 'RA'],
@@ -26,7 +21,7 @@ export const game1Level1: Game1Level = {
         { text: 'CE', isCorrect: true },
         { text: 'TE', isCorrect: false },
       ],
-      audioUrl: pecera,
+      audioKey: 'pecera',
     },
     {
       syllables: ['FLO', '', 'RO'],
@@ -35,7 +30,7 @@ export const game1Level1: Game1Level = {
         { text: 'ME', isCorrect: false },
         { text: 'NE', isCorrect: false },
       ],
-      audioUrl: florero,
+      audioKey: 'florero',
     },
     {
       syllables: ['CAMIO', '', 'TA'],
@@ -44,7 +39,7 @@ export const game1Level1: Game1Level = {
         { text: 'PE', isCorrect: false },
         { text: 'NE', isCorrect: true },
       ],
-      audioUrl: camioneta,
+      audioKey: 'camioneta',
     },
     {
       syllables: ['TELÉ', '', 'NO'],
@@ -53,7 +48,7 @@ export const game1Level1: Game1Level = {
         { text: 'PO', isCorrect: false },
         { text: 'FO', isCorrect: true },
       ],
-      audioUrl: telefono,
+      audioKey: 'telefono',
     },
   ],
 }
@@ -70,7 +65,7 @@ export const game1Level2: Game1Level = {
         { text: 'ME', isCorrect: false },
         { text: 'NE', isCorrect: false },
       ],
-      audioUrl: florero,
+      audioKey: 'florero',
     },
     {
       syllables: ['CA', '', 'SE', 'TA'],
@@ -79,7 +74,7 @@ export const game1Level2: Game1Level = {
         { text: 'TI', isCorrect: false },
         { text: 'NI', isCorrect: false },
       ],
-      audioUrl: camiseta,
+      audioKey: 'camiseta',
     },
     {
       syllables: ['TELÉ', '', 'NO'],
@@ -88,7 +83,7 @@ export const game1Level2: Game1Level = {
         { text: 'PO', isCorrect: false },
         { text: 'FO', isCorrect: true },
       ],
-      audioUrl: telefono,
+      audioKey: 'telefono',
     },
     {
       syllables: ['PE', '', 'RA'],
@@ -97,7 +92,7 @@ export const game1Level2: Game1Level = {
         { text: 'CE', isCorrect: true },
         { text: 'TE', isCorrect: false },
       ],
-      audioUrl: pecera,
+      audioKey: 'pecera',
     },
     {
       syllables: ['CAMIO', '', 'TA'],
@@ -106,7 +101,7 @@ export const game1Level2: Game1Level = {
         { text: 'PE', isCorrect: false },
         { text: 'NE', isCorrect: true },
       ],
-      audioUrl: camioneta,
+      audioKey: 'camioneta',
     },
   ],
 }

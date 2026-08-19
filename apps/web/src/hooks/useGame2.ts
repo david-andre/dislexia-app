@@ -2,9 +2,10 @@ import { useReducer, useCallback, useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuthStore } from '@/stores/authStore'
 import { useGame2ProgressStore } from '@/stores/game2ProgressStore'
-import { getStars } from '@/games/game1'
-import { GAME2_LEVELS, WINNING_THRESHOLD, checkOrder } from '@/games/game2'
-import type { Game2Question, Game2Level } from '@/games/game2'
+import { getStars } from '@dislexia/shared/game1'
+import { GAME2_LEVELS, WINNING_THRESHOLD, checkOrder } from '@dislexia/shared/game2'
+import { getAudioUrl } from '@/audio'
+import type { Game2Question, Game2Level } from '@dislexia/shared/game2'
 
 interface Task {
   taskName: string
@@ -178,7 +179,7 @@ export function useGame2(levelId: string | undefined): UseGame2Result {
       questions.length - 1,
       Math.max(0, questions.length - game.pendingAnswers.length)
     )
-    const src = questions[idx]?.audioUrl
+    const src = getAudioUrl(questions[idx]?.audioKey)
     if (src) new Audio(src).play().catch(() => {})
   }, [game.pendingAnswers.length, questions])
 

@@ -60,7 +60,7 @@ Skill categories:
 | Tool | Purpose |
 |------|---------|
 | Vite + React 18 + TypeScript | Core framework |
-| React Router v6 | Client-side routing with lazy loading |
+| React Router v7 | Client-side routing with lazy loading |
 | Zustand | Global state (auth, children, game progress) |
 | React Hook Form + Zod | Form validation |
 | TanStack Query | Server data fetching (wired to backend) |
@@ -72,18 +72,30 @@ Skill categories:
 
 ## Project Structure
 
+pnpm-workspaces monorepo:
+
+```
+apps/web/               # React frontend (@dislexia/web)
+packages/shared/        # Platform-neutral TS (@dislexia/shared):
+                        #   games/    — level definitions + game logic
+                        #   skills/   — Orton-Gillingham skill engine
+                        #   contracts/ — Zod API schemas (frontend/backend contract)
+apps/api/               # (future) NestJS backend
+apps/mobile/            # (future) mobile app
+```
+
+`apps/web/src/`:
+
 ```
 src/
 ├── assets/
-│   └── audio/          # .mp3 files for syllable audio (Game 1)
+│   └── audio/          # .mp3 files, keyed by filename (see src/audio.ts)
 ├── components/
 │   ├── CardsList/       # Shared syllable card component
 │   ├── LevelSelectPage  # Shared level selection screen (used by all games)
 │   └── SkillsRadar      # Chart.js radar chart
 ├── features/
 │   └── auth/            # Login / Register form
-├── games/               # Level definitions per game
-├── skills/              # Orton-Gillingham skill computation engine
 ├── stores/
 │   ├── authStore        # Logged-in supervisor
 │   ├── childrenStore    # Child profiles (localStorage, per user)
@@ -109,7 +121,7 @@ src/
 ```
 Game session
     └─► Progress store (Zustand + localStorage)
-            └─► Skills engine (src/skills/)
+            └─► Skills engine (@dislexia/shared/skills)
                     └─► Profile view (SkillsRadar + skill rows)
 ```
 
@@ -119,7 +131,7 @@ Currently all data is stored client-side in localStorage. The backend will repla
 
 ## Backend (planned)
 
-The backend lives in a separate repository. The frontend expects a REST API at `VITE_API_URL` (default `http://localhost:4000`).
+The backend will live in this monorepo at `apps/api` (NestJS + Prisma). Request/response shapes are defined once as Zod schemas in `@dislexia/shared/contracts`. The frontend expects a REST API at `VITE_API_URL` (default `http://localhost:4000`). See `docs/backend.md` for the full plan.
 
 ### Auth
 
@@ -171,22 +183,23 @@ The backend lives in a separate repository. The frontend expects a REST API at `
 
 ### Requirements
 
-- Node.js 18+
-- npm or pnpm
+- Node.js 20+
+- pnpm 11+ (`npm install -g pnpm`)
 
-### Install & run
+### Install & run (from the repo root)
 
 ```bash
-npm install
-cp .env.example .env   # set VITE_API_URL
-npm run dev            # http://localhost:5173
+pnpm install
+cp apps/web/.env.example apps/web/.env   # set VITE_API_URL
+pnpm dev               # http://localhost:5173
 ```
 
-### Build
+### Build & test
 
 ```bash
-npm run build
-npm run preview
+pnpm build             # builds all packages
+pnpm test              # tests all packages
+pnpm lint
 ```
 
 ---
